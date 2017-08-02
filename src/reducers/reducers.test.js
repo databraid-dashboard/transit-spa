@@ -1,5 +1,5 @@
 import reducer from '.';
-import * as types from '../constants/constants';
+import * as TYPES from '../constants/constants';
 
 describe('root reducer', () => {
   it('should return the initial state', () => {
@@ -34,7 +34,7 @@ describe('root reducer', () => {
     };
 
     let action = {
-      type: types.UPDATE_CURRENT_LOCATION,
+      type: TYPES.UPDATE_CURRENT_LOCATION,
       currentLocation: {
         name: 'Galvanize',
         address: '44 Tehama St, San Francisco, CA 94105',
@@ -62,7 +62,7 @@ describe('root reducer', () => {
     oldState = newState;
 
     action = {
-      type: types.UPDATE_CURRENT_LOCATION,
+      type: TYPES.UPDATE_CURRENT_LOCATION,
       currentLocation: {
         name: 'Galvanize!',
         address: '543 Howard St, San Francisco, CA 94105',
@@ -106,7 +106,7 @@ describe('root reducer', () => {
     };
 
     let action = {
-      type: types.ADD_DESTINATION,
+      type: TYPES.ADD_DESTINATION,
       destination: {
         id: 5,
         name: 'SFO',
@@ -141,7 +141,7 @@ describe('root reducer', () => {
     oldState = newState;
 
     action = {
-      type: types.ADD_DESTINATION,
+      type: TYPES.ADD_DESTINATION,
       destination: {
         id: 6,
         name: 'OAK',
@@ -208,7 +208,7 @@ describe('root reducer', () => {
     };
 
     let action = {
-      type: types.ADD_JOURNEY,
+      type: TYPES.ADD_JOURNEY,
       destinationId: 5,
       journey: { departureTime: '11:50pm', arrivalTime: '12:30am' },
     };
@@ -247,7 +247,7 @@ describe('root reducer', () => {
     oldState = newState;
 
     action = {
-      type: types.ADD_JOURNEY,
+      type: TYPES.ADD_JOURNEY,
       destinationId: 5,
       journey: { departureTime: '11:55pm', arrivalTime: '12:45am' },
     };
