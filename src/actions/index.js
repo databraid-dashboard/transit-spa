@@ -36,3 +36,11 @@ export function fetchJourneys(destinationId, origin, destination, time) {
     return dispatch(addJourneys(destinationId, json.body));
   };
 }
+
+export function removeJourney(destinationId, index) {
+  return {
+    type: TYPES.REMOVE_JOURNEY,
+    destinationId,
+    index,
+  };
+}
