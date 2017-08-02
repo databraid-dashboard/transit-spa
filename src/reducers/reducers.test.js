@@ -2,62 +2,59 @@ import reducer from '.';
 import * as types from '../constants/constants';
 
 describe('root reducer', () => {
-
-
   it('should return the initial state', () => {
     const expectedInitialState = {
-      "configuration": {
-        "currentLocation": {}
+      configuration: {
+        currentLocation: {},
       },
-      "destinations": {
-        "ids": [],
-        "byId": {}
+      destinations: {
+        ids: [],
+        byId: {},
       },
-      "journies": {
-        "byDestinationId": {}
-      }
+      journeys: {
+        byDestinationId: {},
+      },
     };
 
     expect(reducer(undefined, {})).toEqual(expectedInitialState);
   });
 
-
   it('should handle action type UPDATE_CURRENT_LOCATION', () => {
     let oldState = {
-      "configuration": {
-        "currentLocation": {}
+      configuration: {
+        currentLocation: {},
       },
-      "destinations": {
-        "ids": [],
-        "byId": {}
+      destinations: {
+        ids: [],
+        byId: {},
       },
-      "journies": {
-        "byDestinationId": {}
-      }
+      journeys: {
+        byDestinationId: {},
+      },
     };
 
     let action = {
       type: types.UPDATE_CURRENT_LOCATION,
       currentLocation: {
         name: 'Galvanize',
-        address: '44 Tehama St, San Francisco, CA 94105'
-      }
-    }
+        address: '44 Tehama St, San Francisco, CA 94105',
+      },
+    };
 
     let newState = {
-      "configuration": {
-        "currentLocation": {
+      configuration: {
+        currentLocation: {
           name: 'Galvanize',
-          address: '44 Tehama St, San Francisco, CA 94105'
-        }
+          address: '44 Tehama St, San Francisco, CA 94105',
+        },
       },
-      "destinations": {
-        "ids": [],
-        "byId": {}
+      destinations: {
+        ids: [],
+        byId: {},
       },
-      "journies": {
-        "byDestinationId": {}
-      }
+      journeys: {
+        byDestinationId: {},
+      },
     };
 
     expect(reducer(oldState, action)).toEqual(newState);
@@ -68,45 +65,44 @@ describe('root reducer', () => {
       type: types.UPDATE_CURRENT_LOCATION,
       currentLocation: {
         name: 'Galvanize!',
-        address: '543 Howard St, San Francisco, CA 94105'
-      }
-    }
+        address: '543 Howard St, San Francisco, CA 94105',
+      },
+    };
 
     newState = {
-      "configuration": {
-        "currentLocation": {
+      configuration: {
+        currentLocation: {
           name: 'Galvanize!',
-          address: '543 Howard St, San Francisco, CA 94105'
-        }
+          address: '543 Howard St, San Francisco, CA 94105',
+        },
       },
-      "destinations": {
-        "ids": [],
-        "byId": {}
+      destinations: {
+        ids: [],
+        byId: {},
       },
-      "journies": {
-        "byDestinationId": {}
-      }
+      journeys: {
+        byDestinationId: {},
+      },
     };
 
     expect(reducer(oldState, action)).toEqual(newState);
   });
 
-
   it('should handle action type ADD_DESTINATION', () => {
     let oldState = {
-      "configuration": {
-        "currentLocation": {
+      configuration: {
+        currentLocation: {
           name: 'Galvanize',
-          address: '44 Tehama St, San Francisco, CA 94105'
-        }
+          address: '44 Tehama St, San Francisco, CA 94105',
+        },
       },
-      "destinations": {
-        "ids": [],
-        "byId": {}
+      destinations: {
+        ids: [],
+        byId: {},
       },
-      "journies": {
-        "byDestinationId": {}
-      }
+      journeys: {
+        byDestinationId: {},
+      },
     };
 
     let action = {
@@ -114,30 +110,30 @@ describe('root reducer', () => {
       destination: {
         id: 5,
         name: 'SFO',
-        address: 'SFO, San Francisco, CA 94128'
-      }
-    }
+        address: 'SFO, San Francisco, CA 94128',
+      },
+    };
 
     let newState = {
-      "configuration": {
-        "currentLocation": {
+      configuration: {
+        currentLocation: {
           name: 'Galvanize',
-          address: '44 Tehama St, San Francisco, CA 94105'
-        }
+          address: '44 Tehama St, San Francisco, CA 94105',
+        },
       },
-      "destinations": {
-        "ids": [5],
-        "byId": {
+      destinations: {
+        ids: [5],
+        byId: {
           5: {
             id: 5,
             name: 'SFO',
-            address: 'SFO, San Francisco, CA 94128'
-          }
-        }
+            address: 'SFO, San Francisco, CA 94128',
+          },
+        },
       },
-      "journies": {
-        "byDestinationId": {}
-      }
+      journeys: {
+        byDestinationId: {},
+      },
     };
 
     expect(reducer(oldState, action)).toEqual(newState);
@@ -149,103 +145,101 @@ describe('root reducer', () => {
       destination: {
         id: 6,
         name: 'OAK',
-        address: 'OAK, Oakland, CA 94234'
-      }
-    }
+        address: 'OAK, Oakland, CA 94234',
+      },
+    };
 
     newState = {
-      "configuration": {
-        "currentLocation": {
+      configuration: {
+        currentLocation: {
           name: 'Galvanize',
-          address: '44 Tehama St, San Francisco, CA 94105'
-        }
+          address: '44 Tehama St, San Francisco, CA 94105',
+        },
       },
-      "destinations": {
-        "ids": [5, 6],
-        "byId": {
+      destinations: {
+        ids: [5, 6],
+        byId: {
           5: {
             id: 5,
             name: 'SFO',
-            address: 'SFO, San Francisco, CA 94128'
+            address: 'SFO, San Francisco, CA 94128',
           },
           6: {
             id: 6,
             name: 'OAK',
-            address: 'OAK, Oakland, CA 94234'
-          }
-        }
+            address: 'OAK, Oakland, CA 94234',
+          },
+        },
       },
-      "journies": {
-        "byDestinationId": {}
-      }
+      journeys: {
+        byDestinationId: {},
+      },
     };
 
     expect(reducer(oldState, action)).toEqual(newState);
   });
 
-
   it('should handle action type ADD_JOURNEY', () => {
     let oldState = {
-      "configuration": {
-        "currentLocation": {
+      configuration: {
+        currentLocation: {
           name: 'Galvanize',
-          address: '44 Tehama St, San Francisco, CA 94105'
-        }
+          address: '44 Tehama St, San Francisco, CA 94105',
+        },
       },
-      "destinations": {
-        "ids": [5, 6],
-        "byId": {
+      destinations: {
+        ids: [5, 6],
+        byId: {
           5: {
             id: 5,
             name: 'SFO',
-            address: 'SFO, San Francisco, CA 94128'
+            address: 'SFO, San Francisco, CA 94128',
           },
           6: {
             id: 6,
             name: 'OAK',
-            address: 'OAK, Oakland, CA 94234'
-          }
-        }
+            address: 'OAK, Oakland, CA 94234',
+          },
+        },
       },
-      "journies": {
-        "byDestinationId": {}
-      }
+      journeys: {
+        byDestinationId: {},
+      },
     };
 
     let action = {
       type: types.ADD_JOURNEY,
       destinationId: 5,
-      journey: {departureTime: '11:50pm', arrivalTime: '12:30am'}
-    }
+      journey: { departureTime: '11:50pm', arrivalTime: '12:30am' },
+    };
 
     let newState = {
-      "configuration": {
-        "currentLocation": {
+      configuration: {
+        currentLocation: {
           name: 'Galvanize',
-          address: '44 Tehama St, San Francisco, CA 94105'
-        }
+          address: '44 Tehama St, San Francisco, CA 94105',
+        },
       },
-      "destinations": {
-        "ids": [5, 6],
-        "byId": {
+      destinations: {
+        ids: [5, 6],
+        byId: {
           5: {
             id: 5,
             name: 'SFO',
-            address: 'SFO, San Francisco, CA 94128'
+            address: 'SFO, San Francisco, CA 94128',
           },
           6: {
             id: 6,
             name: 'OAK',
-            address: 'OAK, Oakland, CA 94234'
-          }
-        }
+            address: 'OAK, Oakland, CA 94234',
+          },
+        },
       },
-      "journies": {
-        "byDestinationId": {
-          5: [
-            {departureTime: '11:50pm', arrivalTime: '12:30am'}
-          ]}
-      }
+      journeys: {
+        byDestinationId: {
+          5: [{ departureTime: '11:50pm', arrivalTime: '12:30am' }],
+        },
+      },
     };
 
     expect(reducer(oldState, action)).toEqual(newState);
@@ -255,41 +249,41 @@ describe('root reducer', () => {
     action = {
       type: types.ADD_JOURNEY,
       destinationId: 5,
-      journey: {departureTime: '11:55pm', arrivalTime: '12:45am'}
-    }
+      journey: { departureTime: '11:55pm', arrivalTime: '12:45am' },
+    };
 
     newState = {
-      "configuration": {
-        "currentLocation": {
+      configuration: {
+        currentLocation: {
           name: 'Galvanize',
-          address: '44 Tehama St, San Francisco, CA 94105'
-        }
+          address: '44 Tehama St, San Francisco, CA 94105',
+        },
       },
-      "destinations": {
-        "ids": [5, 6],
-        "byId": {
+      destinations: {
+        ids: [5, 6],
+        byId: {
           5: {
             id: 5,
             name: 'SFO',
-            address: 'SFO, San Francisco, CA 94128'
+            address: 'SFO, San Francisco, CA 94128',
           },
           6: {
             id: 6,
             name: 'OAK',
-            address: 'OAK, Oakland, CA 94234'
-          }
-        }
+            address: 'OAK, Oakland, CA 94234',
+          },
+        },
       },
-      "journies": {
-        "byDestinationId": {
+      journeys: {
+        byDestinationId: {
           5: [
-            {departureTime: '11:50pm', arrivalTime: '12:30am'},
-            {departureTime: '11:55pm', arrivalTime: '12:45am'}
-          ]}
-      }
+            { departureTime: '11:50pm', arrivalTime: '12:30am' },
+            { departureTime: '11:55pm', arrivalTime: '12:45am' },
+          ],
+        },
+      },
     };
 
     expect(reducer(oldState, action)).toEqual(newState);
   });
-
 });
