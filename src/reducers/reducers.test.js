@@ -179,7 +179,7 @@ describe('root reducer', () => {
     expect(reducer(oldState, action)).toEqual(newState);
   });
 
-  it('should handle action type ADD_JOURNEY', () => {
+  it('should handle action type ADD_JOURNEYS', () => {
     let oldState = {
       configuration: {
         currentLocation: {
@@ -208,9 +208,9 @@ describe('root reducer', () => {
     };
 
     let action = {
-      type: TYPES.ADD_JOURNEY,
+      type: TYPES.ADD_JOURNEYS,
       destinationId: 5,
-      journey: { departureTime: '11:50pm', arrivalTime: '12:30am' },
+      journeys: [{ departureTime: '11:50pm', arrivalTime: '12:30am' }],
     };
 
     let newState = {
@@ -247,9 +247,12 @@ describe('root reducer', () => {
     oldState = newState;
 
     action = {
-      type: TYPES.ADD_JOURNEY,
+      type: TYPES.ADD_JOURNEYS,
       destinationId: 5,
-      journey: { departureTime: '11:55pm', arrivalTime: '12:45am' },
+      journeys: [
+        { departureTime: '11:55pm', arrivalTime: '12:45am' },
+        { departureTime: '11:58pm', arrivalTime: '12:48am' },
+      ],
     };
 
     newState = {
@@ -279,6 +282,7 @@ describe('root reducer', () => {
           5: [
             { departureTime: '11:50pm', arrivalTime: '12:30am' },
             { departureTime: '11:55pm', arrivalTime: '12:45am' },
+            { departureTime: '11:58pm', arrivalTime: '12:48am' },
           ],
         },
       },

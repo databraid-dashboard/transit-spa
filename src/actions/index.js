@@ -44,3 +44,10 @@ export function removeJourney(destinationId, index) {
     index,
   };
 }
+
+export function fetchJourneys(destinationId, origin, destination, time) {
+  return async (dispatch, getState, { Api }) => {
+    const json = await Api.fetchJourneys(origin, destination, time);
+    return dispatch(addJourneys(destinationId, json.body));
+  };
+}
