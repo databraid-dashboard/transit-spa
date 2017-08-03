@@ -30,18 +30,10 @@ export function removeJourney(destinationId, index) {
   };
 }
 
-export function fetchJourneys(destinationId, origin, destination, time) {
-  return async (dispatch, getState, { Api }) => {
-    const json = await Api.fetchJourneys(origin, destination, time);
-    return dispatch(addJourneys(destinationId, json.body));
-  };
-}
-
-export function removeJourney(destinationId, index) {
+export function removeDestination(destinationId) {
   return {
-    type: TYPES.REMOVE_JOURNEY,
+    type: TYPES.REMOVE_DESTINATION,
     destinationId,
-    index,
   };
 }
 

@@ -74,6 +74,17 @@ describe('actions', () => {
     expect(actions.removeJourney(destinationId, index)).toEqual(expectedAction);
   });
 
+  it('should create an action to remove a destination', () => {
+    const destinationId = 5;
+
+    const expectedAction = {
+      type: TYPES.REMOVE_DESTINATION,
+      destinationId: 5,
+    };
+
+    expect(actions.removeDestination(destinationId)).toEqual(expectedAction);
+  });
+
   it('should fetch journeys from API', () => {
     const mockApiFetchJourneys = jest.fn();
     mockApiFetchJourneys.mockReturnValue(
