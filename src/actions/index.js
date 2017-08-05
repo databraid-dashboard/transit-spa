@@ -37,6 +37,16 @@ export function removeDestination(destinationId) {
   };
 }
 
+export function fetchAlerts() {
+  return async (dispatch, { Api }) => {
+    const alertsById = await Api.fetchAlerts();
+    await dispatch({
+      type: TYPES.ALERTS_RETRIEVED,
+      alerts: alertsById
+    })
+  }
+}
+
 export function fetchJourneys(destinationId, origin, destination) {
   return async (dispatch, getState, { Api }) => {
     const json = await Api.fetchJourneys(origin, destination);

@@ -6,4 +6,12 @@ export default class Api {
       .then(response => response.json())
       .catch(e => e);
   }
+
+  static fetchAlerts() {
+    return fetch(
+      `http://localhost:8000/alerts`,
+    )
+      .then(response => response.json())
+      .catch(e => e);
+  }
 }

@@ -17,6 +17,7 @@ function timeToLeaveConverter(departureTime) {
 
 class JourneyTable extends Component {
   componentDidMount() {
+    console.log(this.props);
     const { destinationId, origin, destinationsById } = this.props;
     this.props.fetchJourneys(destinationId, origin, destinationsById[destinationId].address);
   }
