@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import BestJourney from './BestJourney';
 import NextBestJourney from './NextBestJourney';
 
-import { fetchJourneys } from '../../actions';
+import { fetchJourneys, fetchAlerts } from '../../actions';
 
 function timeToLeaveConverter(departureTime) {
   const currentTime = Date.now() / 1000;
@@ -17,10 +17,13 @@ function timeToLeaveConverter(departureTime) {
 
 class JourneyTable extends Component {
   componentDidMount() {
-    console.log(this.props);
     const { destinationId, origin, destinationsById } = this.props;
-    this.props.fetchJourneys(destinationId, origin, destinationsById[destinationId].address);
+    this.props.fetchAlerts()
+    .then(() => {
+      this.props.fetchJourneys(destinationId, origin, destinationsById[destinationId].address);
+    });
   }
+
 
   render() {
     const { journeys } = this.props;
@@ -33,7 +36,7 @@ class JourneyTable extends Component {
     return (
       <div>
         <BestJourney
-          timeToLeave={timeToLeaveConverter(bestJourney.departureTimeUTC)}
+          TimeToLeave={timeToLeaveConverter(bestJourney.departureTimeUTC)}
           steps={bestJourney.transitSteps}
           eta={bestJourney.arrivalTimeText}
           conditionStatus={'on-time'}
@@ -57,6 +60,7 @@ JourneyTable.propTypes = {
   }).isRequired,
   fetchJourneys: PropTypes.func.isRequired,
   journeys: PropTypes.arrayOf(PropTypes.object).isRequired,
+  fetchAlerts: PropTypes.func.isRequired,
 };
 
 JourneyTable.defaultProps = {
@@ -109,6 +113,7 @@ export const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       fetchJourneys,
+      fetchAlerts,
     },
     dispatch,
   );

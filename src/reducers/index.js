@@ -74,19 +74,21 @@ export function journeys(state = { byDestinationId: {} }, action) {
 }
 
 export function alerts(state = { alerts: {} }, action) {
-  const alertsById = action.alertsById;
+  const alertsById = action.alerts;
   switch (action.type) {
     case TYPES.ALERTS_RETRIEVED:
-    return {
-      ...state,
-      alerts: alerts,
-    };
-  };
-};
+      return {
+        alerts: alertsById,
+      };
+
+    default:
+      return state;
+  }
+}
 
 export default combineReducers({
   configuration,
   destinations,
   journeys,
-  // alerts,
+  alerts,
 });
