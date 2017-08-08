@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimeToLeave renders list item 1`] = `
+<ListItem>
+  <Icon
+    as="i"
+    name="hourglass half"
+    size="large"
+  />
+  <ListContent>
+    <ListHeader>
+      leave in
+    </ListHeader>
+    <Timer
+      onComplete={[Function]}
+      seconds={120}
+    />
+  </ListContent>
+</ListItem>
+`;

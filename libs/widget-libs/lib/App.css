@@ -1,0 +1,17 @@
+.App {
+	text-align: center;
+}
+.transit-container {
+	height: inherit;
+	padding: 0 !important;
+}
+#button-div {
+	height: inherit !important;
+}
+
+.transit-button {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	margin: 0;
+}
