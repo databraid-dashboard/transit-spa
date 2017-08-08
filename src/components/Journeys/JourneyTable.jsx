@@ -15,6 +15,7 @@ function timeToLeaveConverter(departureTime) {
   return Math.ceil((departureTime - currentTime) / 60);
 }
 
+
 class JourneyTable extends Component {
   componentDidMount() {
     const { destinationId, origin, destinationsById } = this.props;
@@ -26,12 +27,18 @@ class JourneyTable extends Component {
 
 
   render() {
-    const { journeys } = this.props;
+    const { journeys, alerts } = this.props;
 
     if (!journeys) return <div>Loading...</div>;
 
     const bestJourney = journeys[0];
     const nextBestJourney = journeys[1];
+    console.log(bestJourney)
+    const bestJourneyStatus = bestJourney.alerts ?  bestJourney.alerts[0] : 'on-time';
+    const nextBestJourneyStatus = nextBestJourney.alerts ? nextBestJourney.alerts[0]: 'on-time';
+
+
+
 
     return (
       <div>
@@ -39,13 +46,13 @@ class JourneyTable extends Component {
           TimeToLeave={timeToLeaveConverter(bestJourney.departureTimeUTC)}
           steps={bestJourney.transitSteps}
           eta={bestJourney.arrivalTimeText}
-          conditionStatus={'on-time'}
+          conditionStatus={bestJourneyStatus}
         />
         <NextBestJourney
           timeToLeave={timeToLeaveConverter(nextBestJourney.departureTimeUTC)}
           steps={nextBestJourney.transitSteps}
           eta={nextBestJourney.arrivalTimeText}
-          conditionStatus={'future undertain -- see journey table'}
+          conditionStatus={nextBestJourneyStatus}
         />
       </div>
     );
@@ -60,6 +67,9 @@ JourneyTable.propTypes = {
   }).isRequired,
   fetchJourneys: PropTypes.func.isRequired,
   journeys: PropTypes.arrayOf(PropTypes.object).isRequired,
+  alerts: PropTypes.shape({
+    1: PropTypes.object,
+  }).isRequired,
   fetchAlerts: PropTypes.func.isRequired,
 };
 
@@ -100,12 +110,14 @@ export const mapStateToProps = (state, ownProps) => {
   const destinationsById = state.destinations.byId;
   const destinationId = ownProps.id;
   const journeys = state.journeys.byDestinationId[destinationId];
+  const alerts = state.alerts;
 
   return {
     origin,
     journeys,
     destinationId,
     destinationsById,
+    alerts,
   };
 };
 

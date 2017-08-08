@@ -77,9 +77,10 @@ export function fetchJourneys(destinationId, origin, destination) {
           Object.keys(alerts).forEach((alert) => {
             if (alerts[alert].affectedLines) {
               journeyObj.alerts = [];
-              journeyObj.alerts.push(alerts[alert].affectedLines.filter((line) => {
-                return journeyObj.transitSteps[transitStep].line == line ? alert.description : null;
-              }));
+              alerts[alert].affectedLines.forEach((line) => {
+                journeyObj.transitSteps[transitStep].line == line ? journeyObj.alerts.push(alert.description) : null;
+              });
+              !journeyObj.alerts[0] ? journeyObj.alerts[0] = 'on-time' : null;
             }
           });
         }
