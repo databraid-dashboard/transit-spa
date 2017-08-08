@@ -92,12 +92,16 @@ var App = function App() {
             React.createElement(
               Segment,
 <<<<<<< HEAD
+<<<<<<< HEAD
               { className: 'transit-container', textAlign: 'center', __source: {
                   fileName: _jsxFileName,
                   lineNumber: 20
 =======
               {
                 __source: {
+=======
+              { textAlign: 'center', __source: {
+>>>>>>> Fix CSS
                   fileName: _jsxFileName,
                   lineNumber: 17
 >>>>>>> Inital dashboard integration

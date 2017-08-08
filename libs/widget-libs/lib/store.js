@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { createStore } from 'redux';
 import rootReducer from './reducers';
 =======
@@ -8,6 +9,10 @@ import logger from 'redux-logger';
 import rootReducer from './reducers';
 import Api from './utils/Api';
 >>>>>>> Inital dashboard integration
+=======
+import { createStore } from 'redux';
+import rootReducer from './reducers';
+>>>>>>> Fix CSS
 
 /* eslint-disable no-underscore-dangle */
 

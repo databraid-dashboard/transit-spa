@@ -6,7 +6,7 @@ import AddNewDestinationRow from './components/AddNewDestination/AddNewDestinati
 import './App.css';
 
 const App = () =>
-  (<div>
+  (<div className="transit-container">
     <Container>
       <Grid padded centered>
         <Grid.Column id="content-container">

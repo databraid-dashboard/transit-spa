@@ -1,11 +1,9 @@
 {
 	"name": "@databraid/transit-widget",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "",
 	"main": "index.js",
-	"files": [
-		"lib"
-	],
+	"files": ["lib"],
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"build": "NODE_ENV=development babel --presets react-app -D -d lib ../../src/"
