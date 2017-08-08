@@ -3,7 +3,7 @@
 exports[`DestinationTable should render an empty table 1`] = `
 <div>
   <Segment>
-    <DestinationRow
+    <Component
       id={1}
       name=""
     />
