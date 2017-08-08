@@ -9,14 +9,14 @@ import NextBestJourney from './NextBestJourney';
 
 import { fetchJourneys, fetchAlerts } from '../../actions';
 
-function timeToLeaveConverter(departureTime) {
-  const currentTime = Date.now() / 1000;
+export function timeToLeaveConverter(departureTimeInSeconds) {
+  const currentTimeInSeconds = Date.now() / 1000;
+  const diff = departureTimeInSeconds - currentTimeInSeconds;
 
-  return Math.ceil((departureTime - currentTime) / 60);
+  return Math.floor(diff);
 }
 
-
-class JourneyTable extends Component {
+export class JourneyTable extends Component {
   componentDidMount() {
     const { destinationId, origin, destinationsById } = this.props;
     this.props.fetchAlerts()
@@ -25,31 +25,29 @@ class JourneyTable extends Component {
     });
   }
 
-
   render() {
-    const { journeys, alerts } = this.props;
+    const { journeys } = this.props;
 
     if (!journeys) return <div>Loading...</div>;
 
     const bestJourney = journeys[0];
     const nextBestJourney = journeys[1];
-    console.log(bestJourney)
     const bestJourneyStatus = bestJourney.alerts ?  bestJourney.alerts[0] : 'on-time';
     const nextBestJourneyStatus = nextBestJourney.alerts ? nextBestJourney.alerts[0]: 'on-time';
 
-
-
+    const timeToLeaveBest = timeToLeaveConverter(bestJourney.departureTimeUTC);
+    const timeToLeaveNextBest = timeToLeaveConverter(nextBestJourney.departureTimeUTC);
 
     return (
       <div>
         <BestJourney
-          TimeToLeave={timeToLeaveConverter(bestJourney.departureTimeUTC)}
+          timeToLeaveInSeconds={timeToLeaveBest}
           steps={bestJourney.transitSteps}
           eta={bestJourney.arrivalTimeText}
           conditionStatus={bestJourneyStatus}
         />
         <NextBestJourney
-          timeToLeave={timeToLeaveConverter(nextBestJourney.departureTimeUTC)}
+          timeToLeaveInSeconds={timeToLeaveNextBest}
           steps={nextBestJourney.transitSteps}
           eta={nextBestJourney.arrivalTimeText}
           conditionStatus={nextBestJourneyStatus}
@@ -80,7 +78,7 @@ JourneyTable.defaultProps = {
   fetchJourneys: () => {},
   journeys: [
     {
-      departureTimeUTC: Date.now() / 1000,
+      departureTimeUTC: Date.now(),
       arrivalTimeText: '00:00am',
       transitSteps: [
         { duration: '1 mins', instruction: 'Walk to Some St. Station', mode: 'WALKING' },
@@ -92,7 +90,7 @@ JourneyTable.defaultProps = {
       ],
     },
     {
-      departureTimeUTC: Date.now() / 1000,
+      departureTimeUTC: Date.now(),
       arrivalTimeText: '00:00pm',
       transitSteps: [
         { duration: '4 mins', instruction: 'Walk to Some St. Station', mode: 'WALKING' },

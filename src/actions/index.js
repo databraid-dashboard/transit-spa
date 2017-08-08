@@ -22,11 +22,10 @@ export function addJourneys(destinationId, journeys) {
   };
 }
 
-export function removeJourney(destinationId, index) {
+export function removeJourneys(destinationId) {
   return {
-    type: TYPES.REMOVE_JOURNEY,
+    type: TYPES.REMOVE_JOURNEYS,
     destinationId,
-    index,
   };
 }
 
@@ -85,6 +84,7 @@ export function fetchJourneys(destinationId, origin, destination) {
           });
         }
       });
+      console.log(journeyObj);
       return journeyObj;
     });
     return dispatch(addJourneys(destinationId, journeys));
