@@ -19,11 +19,16 @@ var Timer = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (Timer.__proto__ || Object.getPrototypeOf(Timer)).call(this, props));
 
+<<<<<<< HEAD
     _this.state = { currentCount: props.seconds };
+=======
+    _this.state = { count: props.seconds, expired: false };
+>>>>>>> Inital dashboard integration
     return _this;
   }
 
   _createClass(Timer, [{
+<<<<<<< HEAD
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this2 = this;
@@ -55,25 +60,57 @@ var Timer = function (_Component) {
         this.props.onComplete();
         clearInterval(this.timerID);
       }
+=======
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.setState({ count: nextProps.seconds });
+    }
+  }, {
+    key: 'decrementOrExpire',
+    value: function decrementOrExpire() {
+      return this.state.count > 0 ? { count: this.state.count - 1 } : { expired: true };
+>>>>>>> Inital dashboard integration
     }
   }, {
     key: 'render',
     value: function render() {
+<<<<<<< HEAD
       var currentCount = this.state.currentCount;
 
 
       var sec = currentCount % 60;
       var min = (currentCount - sec) / 60;
+=======
+      var _this2 = this;
+
+      var count = this.state.count;
+
+
+      setTimeout(function () {
+        return _this2.setState(_this2.decrementOrExpire);
+      }, 1000);
+
+      var sec = count % 60;
+      var min = (count - sec) / 60;
+>>>>>>> Inital dashboard integration
 
       var seconds = sec < 10 ? '0' + sec : sec;
       var minutes = min < 10 ? '0' + min : min;
 
+<<<<<<< HEAD
       return React.createElement(
+=======
+      return this.state.expired ? this.props.onComplete() : React.createElement(
+>>>>>>> Inital dashboard integration
         'div',
         {
           __source: {
             fileName: _jsxFileName,
+<<<<<<< HEAD
             lineNumber: 45
+=======
+            lineNumber: 31
+>>>>>>> Inital dashboard integration
           },
           __self: this
         },

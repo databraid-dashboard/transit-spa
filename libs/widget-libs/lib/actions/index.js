@@ -40,13 +40,21 @@ export function removeDestination(destinationId) {
   };
 }
 
+<<<<<<< HEAD
 export function refreshJourneys(destinationId, origin, destination) {
+=======
+export function fetchJourneys(destinationId, origin, destination) {
+>>>>>>> Inital dashboard integration
   var _this = this;
 
   return function () {
     var _ref2 = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(dispatch, getState, _ref) {
       var Api = _ref.Api;
+<<<<<<< HEAD
       var json, journeys, journeysOffset;
+=======
+      var json, journeys;
+>>>>>>> Inital dashboard integration
       return _regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -72,6 +80,7 @@ export function refreshJourneys(destinationId, origin, destination) {
                 };
                 return journeyObj;
               });
+<<<<<<< HEAD
               journeysOffset = journeys.filter(function (journey) {
                 var currentTimeInSeconds = Date.now() / 1000;
                 var diff = journey.departureTimeUTC - currentTimeInSeconds;
@@ -86,6 +95,11 @@ export function refreshJourneys(destinationId, origin, destination) {
               dispatch(addJourneys(destinationId, journeysOffset));
 
             case 7:
+=======
+              return _context.abrupt('return', dispatch(addJourneys(destinationId, journeys)));
+
+            case 5:
+>>>>>>> Inital dashboard integration
             case 'end':
               return _context.stop();
           }
@@ -97,6 +111,7 @@ export function refreshJourneys(destinationId, origin, destination) {
       return _ref2.apply(this, arguments);
     };
   }();
+<<<<<<< HEAD
 }
 
 export function fetchJourneys(destinationId, origin, destination) {
@@ -149,4 +164,6 @@ export function fetchJourneys(destinationId, origin, destination) {
       return _ref4.apply(this, arguments);
     };
   }();
+=======
+>>>>>>> Inital dashboard integration
 }

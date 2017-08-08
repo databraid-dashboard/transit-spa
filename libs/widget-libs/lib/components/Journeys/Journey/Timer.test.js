@@ -2,6 +2,7 @@ var _jsxFileName = '../../src/components/Journeys/Journey/Timer.test.jsx',
     _this = this;
 
 import React from 'react';
+<<<<<<< HEAD
 import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import Timer, { decrement, onComplete } from './Timer';
@@ -13,12 +14,27 @@ describe('Timer', function () {
     var component = shallow(React.createElement(Timer, { seconds: 120, onComplete: callback, __source: {
         fileName: _jsxFileName,
         lineNumber: 10
+=======
+import { shallow, mount } from 'enzyme';
+import toJson from 'enzyme-to-json';
+import Timer from './Timer';
+
+describe('Timer', function () {
+  it('renders when passed seconds as props', function () {
+    var seconds = 120;
+    var callback = function callback() {};
+
+    var component = shallow(React.createElement(Timer, { seconds: seconds, onComplete: callback, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 11
+>>>>>>> Inital dashboard integration
       },
       __self: _this
     }));
     expect(toJson(component)).toMatchSnapshot();
   });
 
+<<<<<<< HEAD
   it('renders double-digit minutes and seconds when passed seconds as props', function () {
     var component = shallow(React.createElement(Timer, { seconds: 600, onComplete: callback, __source: {
         fileName: _jsxFileName,
@@ -43,12 +59,22 @@ describe('Timer', function () {
     var component = mount(React.createElement(Timer, { seconds: 120, onComplete: callback, __source: {
         fileName: _jsxFileName,
         lineNumber: 25
+=======
+  it('accepts a callback function as props', function () {
+    var seconds = 120;
+    var callback = function callback() {};
+
+    var component = mount(React.createElement(Timer, { seconds: seconds, onComplete: callback, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 19
+>>>>>>> Inital dashboard integration
       },
       __self: _this
     }));
     expect(component.props().onComplete).toEqual(callback);
   });
 
+<<<<<<< HEAD
   it('initializes with currentCount equal to the seconds passed in as props', function () {
     var component = mount(React.createElement(Timer, { seconds: 120, onComplete: callback, __source: {
         fileName: _jsxFileName,
@@ -113,5 +139,49 @@ describe('Timer', function () {
     }));
     component.instance().decrement();
     expect(onComplete).toHaveBeenCalled();
+=======
+  it('initializes with count equal the the seconds and expired equal to false in the state', function () {
+    var seconds = 120;
+    var callback = function callback() {};
+
+    var component = mount(React.createElement(Timer, { seconds: seconds, onComplete: callback, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 27
+      },
+      __self: _this
+    }));
+    expect(component.state('count')).toEqual(120);
+    expect(component.state('expired')).toEqual(false);
+  });
+
+  it('calls decrementOrExpire and decreases the count', function () {
+    var seconds = 120;
+    var expected = { count: seconds - 1 };
+    var callback = function callback() {};
+
+    var component = shallow(React.createElement(Timer, { seconds: seconds, onComplete: callback, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 37
+      },
+      __self: _this
+    }));
+    expect(component.instance().state.count).toEqual(seconds);
+    expect(component.instance().decrementOrExpire().count).toEqual(expected.count);
+  });
+
+  it('has componentWillReceiveProps', function () {
+    var initialSeconds = 120;
+    var newSeconds = 300;
+    var callback = function callback() {};
+
+    var component = shallow(React.createElement(Timer, { seconds: initialSeconds, onComplete: callback, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 47
+      },
+      __self: _this
+    }));
+    expect(component.instance().state.count).toEqual(initialSeconds);
+    // expect(component.instance().componentWillReceiveProps(newSeconds).count).toEqual(newSeconds);
+>>>>>>> Inital dashboard integration
   });
 });

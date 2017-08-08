@@ -13,20 +13,33 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+<<<<<<< HEAD
 import { fetchJourneys, refreshJourneys } from '../../actions';
+=======
+>>>>>>> Inital dashboard integration
 
 import BestJourney from './BestJourney';
 import NextBestJourney from './NextBestJourney';
 
+<<<<<<< HEAD
 export function timeToLeaveConverter(departureTimeInSeconds) {
   var currentTimeInSeconds = Date.now() / 1000;
   var diff = departureTimeInSeconds - currentTimeInSeconds;
+=======
+import { fetchJourneys } from '../../actions';
+
+export function timeToLeaveConverter(departureTimeInSeconds) {
+  var currentTimeInSeconds = Date.now() / 1000;
+  var diff = departureTimeInSeconds - currentTimeInSeconds;
+
+>>>>>>> Inital dashboard integration
   return Math.floor(diff);
 }
 
 export var JourneyTable = function (_Component) {
   _inherits(JourneyTable, _Component);
 
+<<<<<<< HEAD
   function JourneyTable(props) {
     _classCallCheck(this, JourneyTable);
 
@@ -34,6 +47,12 @@ export var JourneyTable = function (_Component) {
 
     _this.callRefreshJourneys = _this.callRefreshJourneys.bind(_this);
     return _this;
+=======
+  function JourneyTable() {
+    _classCallCheck(this, JourneyTable);
+
+    return _possibleConstructorReturn(this, (JourneyTable.__proto__ || Object.getPrototypeOf(JourneyTable)).apply(this, arguments));
+>>>>>>> Inital dashboard integration
   }
 
   _createClass(JourneyTable, [{
@@ -47,6 +66,7 @@ export var JourneyTable = function (_Component) {
       this.props.fetchJourneys(destinationId, origin, destinationsById[destinationId].address);
     }
   }, {
+<<<<<<< HEAD
     key: 'callRefreshJourneys',
     value: function callRefreshJourneys() {
       var _props2 = this.props,
@@ -57,17 +77,27 @@ export var JourneyTable = function (_Component) {
       this.props.refreshJourneys(destinationId, origin, destinationsById[destinationId].address);
     }
   }, {
+=======
+>>>>>>> Inital dashboard integration
     key: 'render',
     value: function render() {
       var journeys = this.props.journeys;
 
 
+<<<<<<< HEAD
       if (!journeys || journeys.length === 0) return React.createElement(
+=======
+      if (!journeys) return React.createElement(
+>>>>>>> Inital dashboard integration
         'div',
         {
           __source: {
             fileName: _jsxFileName,
+<<<<<<< HEAD
             lineNumber: 37
+=======
+            lineNumber: 28
+>>>>>>> Inital dashboard integration
           },
           __self: this
         },
@@ -85,7 +115,11 @@ export var JourneyTable = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
+<<<<<<< HEAD
             lineNumber: 46
+=======
+            lineNumber: 37
+>>>>>>> Inital dashboard integration
           },
           __self: this
         },
@@ -94,10 +128,16 @@ export var JourneyTable = function (_Component) {
           steps: bestJourney.transitSteps,
           eta: bestJourney.arrivalTimeText,
           conditionStatus: 'on-time',
+<<<<<<< HEAD
           callRefreshJourneys: this.callRefreshJourneys,
           __source: {
             fileName: _jsxFileName,
             lineNumber: 47
+=======
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 38
+>>>>>>> Inital dashboard integration
           },
           __self: this
         }),
@@ -106,10 +146,16 @@ export var JourneyTable = function (_Component) {
           steps: nextBestJourney.transitSteps,
           eta: nextBestJourney.arrivalTimeText,
           conditionStatus: 'future undertain -- see journey table',
+<<<<<<< HEAD
           callRefreshJourneys: this.callRefreshJourneys,
           __source: {
             fileName: _jsxFileName,
             lineNumber: 54
+=======
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 44
+>>>>>>> Inital dashboard integration
           },
           __self: this
         })
@@ -127,7 +173,10 @@ JourneyTable.propTypes = {
     1: PropTypes.object
   }).isRequired,
   fetchJourneys: PropTypes.func.isRequired,
+<<<<<<< HEAD
   refreshJourneys: PropTypes.func.isRequired,
+=======
+>>>>>>> Inital dashboard integration
   journeys: PropTypes.arrayOf(PropTypes.object)
 };
 
@@ -136,7 +185,10 @@ JourneyTable.defaultProps = {
   origin: '',
   destinationsById: { 1: {} },
   fetchJourneys: function fetchJourneys() {},
+<<<<<<< HEAD
   refreshJourneys: function refreshJourneys() {},
+=======
+>>>>>>> Inital dashboard integration
   journeys: [{
     departureTimeUTC: Date.now(),
     arrivalTimeText: '00:00am',
@@ -171,8 +223,12 @@ export var mapStateToProps = function mapStateToProps(state, ownProps) {
 
 export var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return bindActionCreators({
+<<<<<<< HEAD
     fetchJourneys: fetchJourneys,
     refreshJourneys: refreshJourneys
+=======
+    fetchJourneys: fetchJourneys
+>>>>>>> Inital dashboard integration
   }, dispatch);
 };
 

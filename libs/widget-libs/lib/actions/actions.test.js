@@ -116,9 +116,13 @@ describe('actions', function () {
         transitSteps: [{
           instruction: 'Walk to Montgomery St. Station',
           mode: 'WALKING',
+<<<<<<< HEAD
           duration: '8 mins',
           shortName: '',
           agency: ''
+=======
+          duration: '8 mins'
+>>>>>>> Inital dashboard integration
         }]
       }]
     }];

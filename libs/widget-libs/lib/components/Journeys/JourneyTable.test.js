@@ -2,9 +2,16 @@ var _jsxFileName = '../../src/components/Journeys/JourneyTable.test.jsx',
     _this = this;
 
 import React from 'react';
+<<<<<<< HEAD
 import { shallow, mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { JourneyTable, timeToLeaveConverter, mapDispatchToProps } from './JourneyTable';
+=======
+import { shallow, render, mount } from 'enzyme';
+import toJson from 'enzyme-to-json';
+import { JourneyTable, timeToLeaveConverter, mapStateToProps, mapDispatchToProps } from './JourneyTable';
+import { fetchJourneys } from '../../actions';
+>>>>>>> Inital dashboard integration
 
 describe('JourneyTable', function () {
   var testData = {
@@ -40,7 +47,11 @@ describe('JourneyTable', function () {
       journeys: null,
       __source: {
         fileName: _jsxFileName,
+<<<<<<< HEAD
         lineNumber: 42
+=======
+        lineNumber: 48
+>>>>>>> Inital dashboard integration
       },
       __self: _this
     }));
@@ -49,6 +60,11 @@ describe('JourneyTable', function () {
 
   it('mapDispatchToProps', function () {
     var dispatch = jest.fn();
+<<<<<<< HEAD
+=======
+    var fetchJourneys = jest.fn();
+    var bindActionCreators = jest.fn();
+>>>>>>> Inital dashboard integration
 
     expect(mapDispatchToProps(dispatch)).toHaveProperty('fetchJourneys');
   });
@@ -64,7 +80,11 @@ describe('JourneyTable', function () {
       fetchJourneys: fetchJourneys,
       __source: {
         fileName: _jsxFileName,
+<<<<<<< HEAD
         lineNumber: 62
+=======
+        lineNumber: 70
+>>>>>>> Inital dashboard integration
       },
       __self: _this
     }));

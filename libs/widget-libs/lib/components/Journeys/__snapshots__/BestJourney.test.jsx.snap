@@ -2,7 +2,10 @@
 
 exports[`BestJourney should render when passed required props 1`] = `
 <BestJourney
+<<<<<<< HEAD
   callRefreshJourneys={[Function]}
+=======
+>>>>>>> Inital dashboard integration
   conditionStatus="on-time"
   eta="11:00am"
   steps={
@@ -30,7 +33,10 @@ exports[`BestJourney should render when passed required props 1`] = `
           role="list"
         >
           <TimeToLeave
+<<<<<<< HEAD
             callRefreshJourneys={[Function]}
+=======
+>>>>>>> Inital dashboard integration
             timeToLeaveInSeconds={120}
           >
             <ListItem>
@@ -115,7 +121,10 @@ exports[`BestJourney should render when passed required props 1`] = `
                           />
                         </Icon>
                         <StepContent
+<<<<<<< HEAD
                           description="to Some St. Station"
+=======
+>>>>>>> Inital dashboard integration
                           title="Walk"
                         >
                           <div
@@ -130,6 +139,7 @@ exports[`BestJourney should render when passed required props 1`] = `
                                 Walk
                               </div>
                             </StepTitle>
+<<<<<<< HEAD
                             <StepDescription
                               description="to Some St. Station"
                             >
@@ -139,6 +149,8 @@ exports[`BestJourney should render when passed required props 1`] = `
                                 to Some St. Station
                               </div>
                             </StepDescription>
+=======
+>>>>>>> Inital dashboard integration
                           </div>
                         </StepContent>
                       </div>

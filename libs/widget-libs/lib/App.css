@@ -1,4 +1,5 @@
 .App {
+<<<<<<< HEAD
 	text-align: center;
 }
 .transit-container {
@@ -14,4 +15,20 @@
 	top: 50%;
 	transform: translateY(-50%);
 	margin: 0;
+=======
+  text-align: center;
+}
+
+#destinations-container {
+  justify-content: center;
+  margin: 2% 0;
+}
+
+#new-destination-container {
+  justify-content: center;
+}
+
+#content-container {
+  justify-content: flex-end;
+>>>>>>> Inital dashboard integration
 }

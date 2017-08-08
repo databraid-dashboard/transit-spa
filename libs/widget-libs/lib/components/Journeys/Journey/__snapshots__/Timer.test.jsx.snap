@@ -1,5 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+<<<<<<< HEAD
 exports[`Timer renders double-digit minutes and seconds when passed seconds as props 1`] = `
 <div>
   10
@@ -9,6 +10,9 @@ exports[`Timer renders double-digit minutes and seconds when passed seconds as p
 `;
 
 exports[`Timer renders minutes and seconds when passed seconds as props 1`] = `
+=======
+exports[`Timer renders when passed seconds as props 1`] = `
+>>>>>>> Inital dashboard integration
 <div>
   02
   :

@@ -11,6 +11,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PlacesAutocomplete from 'react-places-autocomplete';
+<<<<<<< HEAD
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addDestination } from '../../actions';
@@ -18,6 +19,17 @@ import { addDestination } from '../../actions';
 import Api from '../../utils/Api';
 
 export var PlacesAutocompleteForm = function (_Component) {
+=======
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addDestination } from '../../actions';
+import './button.css';
+
+import Api from '../../utils/Api';
+
+var PlacesAutocompleteForm = function (_Component) {
+>>>>>>> Inital dashboard integration
   _inherits(PlacesAutocompleteForm, _Component);
 
   function PlacesAutocompleteForm(props) {
@@ -26,7 +38,10 @@ export var PlacesAutocompleteForm = function (_Component) {
     var _this = _possibleConstructorReturn(this, (PlacesAutocompleteForm.__proto__ || Object.getPrototypeOf(PlacesAutocompleteForm)).call(this, props));
 
     _this.reportError = function (message) {
+<<<<<<< HEAD
       /* eslint-disable no-alert */
+=======
+>>>>>>> Inital dashboard integration
       alert(message);
       _this.setState({ address: '' });
     };
@@ -40,9 +55,15 @@ export var PlacesAutocompleteForm = function (_Component) {
           _this.props.onClick();
           return;
         }
+<<<<<<< HEAD
         _this.reportError('no transit options available');
       }).catch(function (e) {
         return e;
+=======
+        return _this.reportError('no transit options available');
+      }).catch(function (e) {
+        console.log(e);
+>>>>>>> Inital dashboard integration
       });
     };
 
@@ -66,18 +87,27 @@ export var PlacesAutocompleteForm = function (_Component) {
         'form',
         { className: 'ui semantic', onSubmit: this.handleFormSubmit, __source: {
             fileName: _jsxFileName,
+<<<<<<< HEAD
             lineNumber: 46
+=======
+            lineNumber: 49
+>>>>>>> Inital dashboard integration
           },
           __self: this
         },
         React.createElement(PlacesAutocomplete, { inputProps: inputProps, __source: {
             fileName: _jsxFileName,
+<<<<<<< HEAD
             lineNumber: 47
+=======
+            lineNumber: 50
+>>>>>>> Inital dashboard integration
           },
           __self: this
         }),
         React.createElement(
           'button',
+<<<<<<< HEAD
           {
             className: 'ui green button',
             id: 'submit-destination',
@@ -85,6 +115,11 @@ export var PlacesAutocompleteForm = function (_Component) {
             __source: {
               fileName: _jsxFileName,
               lineNumber: 48
+=======
+          { className: 'ui green button', id: 'submit-destination', type: 'submit', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 51
+>>>>>>> Inital dashboard integration
             },
             __self: this
           },
@@ -99,14 +134,22 @@ export var PlacesAutocompleteForm = function (_Component) {
 
 PlacesAutocompleteForm.propTypes = {
   onClick: PropTypes.func.isRequired,
+<<<<<<< HEAD
   addDestination: PropTypes.func.isRequired,
   origin: PropTypes.string.isRequired
+=======
+  addDestination: PropTypes.func.isRequired
+>>>>>>> Inital dashboard integration
 };
 
 PlacesAutocompleteForm.defaultProps = {
   onClick: function onClick() {},
+<<<<<<< HEAD
   addDestination: function addDestination() {},
   origin: ''
+=======
+  addDestination: function addDestination() {}
+>>>>>>> Inital dashboard integration
 };
 
 export var mapStateToProps = function mapStateToProps(state) {

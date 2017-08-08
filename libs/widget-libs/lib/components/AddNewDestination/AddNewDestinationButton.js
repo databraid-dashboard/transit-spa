@@ -4,6 +4,10 @@ var _jsxFileName = '../../src/components/AddNewDestination/AddNewDestinationButt
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'semantic-ui-react';
+<<<<<<< HEAD
+=======
+import './button.css';
+>>>>>>> Inital dashboard integration
 
 var AddNewDestinationButton = function AddNewDestinationButton(_ref) {
   var onClick = _ref.onClick;
@@ -11,6 +15,7 @@ var AddNewDestinationButton = function AddNewDestinationButton(_ref) {
     'div',
     { id: 'button-div', __source: {
         fileName: _jsxFileName,
+<<<<<<< HEAD
         lineNumber: 6
       },
       __self: _this
@@ -25,6 +30,15 @@ var AddNewDestinationButton = function AddNewDestinationButton(_ref) {
       __source: {
         fileName: _jsxFileName,
         lineNumber: 7
+=======
+        lineNumber: 7
+      },
+      __self: _this
+    },
+    React.createElement(Button, { circular: true, icon: 'plus', size: 'huge', color: 'blue', onClick: onClick, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 8
+>>>>>>> Inital dashboard integration
       },
       __self: _this
     })

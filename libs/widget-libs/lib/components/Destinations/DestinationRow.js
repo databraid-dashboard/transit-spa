@@ -10,7 +10,11 @@ import JourneyTable from '../Journeys/JourneyTable';
 import DestinationHeader from './Destination/DestinationHeader';
 import './destination.css';
 
+<<<<<<< HEAD
 export var DestinationRow = function DestinationRow(_ref) {
+=======
+var DestinationRow = function DestinationRow(_ref) {
+>>>>>>> Inital dashboard integration
   var id = _ref.id,
       name = _ref.name;
   return React.createElement(

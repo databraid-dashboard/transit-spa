@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import { Icon, List, Step } from 'semantic-ui-react';
 
+<<<<<<< HEAD
 function formatAgency(step) {
   var output = '';
   if (step.mode.includes('WALKING')) {
@@ -36,6 +37,8 @@ function getInstructions(step) {
   return instr;
 }
 
+=======
+>>>>>>> Inital dashboard integration
 var JourneyVisualization = function JourneyVisualization(_ref) {
   var active = _ref.active,
       steps = _ref.steps;
@@ -44,7 +47,11 @@ var JourneyVisualization = function JourneyVisualization(_ref) {
     {
       __source: {
         fileName: _jsxFileName,
+<<<<<<< HEAD
         lineNumber: 37
+=======
+        lineNumber: 7
+>>>>>>> Inital dashboard integration
       },
       __self: _this
     },
@@ -53,21 +60,34 @@ var JourneyVisualization = function JourneyVisualization(_ref) {
       {
         __source: {
           fileName: _jsxFileName,
+<<<<<<< HEAD
           lineNumber: 38
+=======
+          lineNumber: 8
+>>>>>>> Inital dashboard integration
         },
         __self: _this
       },
       steps.map(function (step, index) {
         var name = void 0;
+<<<<<<< HEAD
+=======
+        var title = void 0;
+>>>>>>> Inital dashboard integration
 
         if (step.mode === 'WALKING' && index !== 0) return null;
 
         if (step.mode.includes('WALKING')) {
           name = 'blind';
+<<<<<<< HEAD
+=======
+          title = 'Walk';
+>>>>>>> Inital dashboard integration
         }
 
         if (step.mode === 'TRANSIT') {
           name = step.instruction.includes('rail') ? 'subway' : 'bus';
+<<<<<<< HEAD
         }
 
         var uniqueKey = step.shortName + step.instruction;
@@ -79,11 +99,22 @@ var JourneyVisualization = function JourneyVisualization(_ref) {
           { disabled: active, key: uniqueKey, __source: {
               fileName: _jsxFileName,
               lineNumber: 57
+=======
+          title = step.instruction.includes('rail') ? 'Train' : 'Bus';
+        }
+
+        return React.createElement(
+          Step,
+          { disabled: active, key: step.instruction, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 26
+>>>>>>> Inital dashboard integration
             },
             __self: _this
           },
           React.createElement(Icon, { name: name, size: 'big', __source: {
               fileName: _jsxFileName,
+<<<<<<< HEAD
               lineNumber: 58
             },
             __self: _this
@@ -91,6 +122,15 @@ var JourneyVisualization = function JourneyVisualization(_ref) {
           React.createElement(Step.Content, { title: agency, description: instructions, __source: {
               fileName: _jsxFileName,
               lineNumber: 59
+=======
+              lineNumber: 27
+            },
+            __self: _this
+          }),
+          React.createElement(Step.Content, { title: title, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 28
+>>>>>>> Inital dashboard integration
             },
             __self: _this
           })
