@@ -19,7 +19,7 @@ const App = () =>
           </Grid.Row>
 
           <Grid.Row id="new-destination-container">
-            <Segment>
+            <Segment textAlign="center">
               <AddNewDestinationRow />
             </Segment>
           </Grid.Row>
