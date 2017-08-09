@@ -8,7 +8,11 @@ describe('root reducer', () => {
         alerts: {},
       },
       configuration: {
-        currentLocation: { address: '44 Tehama St, San Francisco, CA 94105' },
+        geolocating: true,
+        currentLocation: {
+          address: '44 Tehama St, San Francisco, CA 94105',
+          lat: 37.7873889,
+          lng: -122.3964106 },
       },
       destinations: {
         ids: [],
@@ -28,7 +32,12 @@ describe('root reducer', () => {
         alerts: {},
       },
       configuration: {
-        currentLocation: { address: '44 Tehama St, San Francisco, CA 94105' },
+        geolocating: true,
+        currentLocation: {
+          address: '44 Tehama St, San Francisco, CA 94105',
+          lat: 37.7873889,
+          lng: -122.3964106,
+        },
       },
       destinations: {
         ids: [],
@@ -41,8 +50,11 @@ describe('root reducer', () => {
 
     const action = {
       type: TYPES.UPDATE_CURRENT_LOCATION,
+      geolocating: true,
       currentLocation: {
         address: '543 Howard St, San Francisco, CA 94105',
+        lat: 37.123456,
+        lng: -122.123456,
       },
     };
 
@@ -51,8 +63,11 @@ describe('root reducer', () => {
         alerts: {},
       },
       configuration: {
+        geolocating: false,
         currentLocation: {
           address: '543 Howard St, San Francisco, CA 94105',
+          lat: 37.123456,
+          lng: -122.123456,
         },
       },
       destinations: {
