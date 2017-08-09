@@ -8,7 +8,7 @@ const AddNewDestinationButton = ({ onClick }) =>
       className="transit-button"
       circular
       icon="plus"
-      size="huge"
+      size="massive"
       color="blue"
       onClick={onClick}
     />
