@@ -7,9 +7,9 @@ import {
   mapStateToProps,
   mapDispatchToProps,
 } from './JourneyTable';
-import { fetchJourneys } from '../../actions';
+import { fetchJourneys, fetchAlerts } from '../../actions';
 
-describe('JourneyTable', () => {
+describe('JouwrneyTable', () => {
   const testData = {
     destinationId: 1,
     origin: '',
@@ -41,6 +41,13 @@ describe('JourneyTable', () => {
       },
     ],
     timeToLeaveInSeconds: 1502222223,
+    alerts: {
+      1: {
+        affectedLines: ['18', '52'],
+        description: 'Due to construction, Lines 18 and 52 will not serve any stops on Monroe Street between Jackson Street and San Pablo Avenue..',
+        subject: 'Lines 18 and 52 - Stop Closures near UC Village on Monroe Street and San Pablo Avenue',
+      }
+    },
   };
 
   it('should render Loading...', () => {
@@ -59,6 +66,7 @@ describe('JourneyTable', () => {
   it('mapDispatchToProps', () => {
     const dispatch = jest.fn();
     const fetchJourneys = jest.fn();
+    const fetchAlerts = jest.fn();
     const bindActionCreators = jest.fn();
 
     expect(mapDispatchToProps(dispatch)).toHaveProperty('fetchJourneys');
@@ -73,11 +81,31 @@ describe('JourneyTable', () => {
         origin={testData.origin}
         destinationsById={testData.destinationsById}
         journeys={testData.journeys}
+        alerts={testData.alerts}
         fetchJourneys={fetchJourneys}
+        fetchAlerts={fetchAlerts}
       />,
     );
 
     expect(fetchJourneys).toHaveBeenCalled();
+  });
+
+  it('calls fetchAlert on load', () => {
+    const fetchJourneys = jest.fn();
+    const component = mount(
+      <JourneyTable
+        id={1}
+        destinationId={testData.destinationId}
+        origin={testData.origin}
+        destinationsById={testData.destinationsById}
+        journeys={testData.journeys}
+        alerts={testData.alerts}
+        fetchJourneys={fetchJourneys}
+        fetchAlerts={fetchAlerts}
+      />,
+    );
+
+    expect(fetchAlerts.toHaveBeenCalled();
   });
 });
 

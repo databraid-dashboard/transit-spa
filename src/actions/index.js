@@ -43,7 +43,6 @@ export function fetchAlerts() {
       type: TYPES.ALERTS_RETRIEVED,
       alerts: alertsById,
     });
-
     return alertsById;
   };
 }

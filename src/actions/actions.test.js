@@ -88,6 +88,8 @@ describe('actions', () => {
                   html_instructions: 'Walk to Montgomery St. Station',
                   travel_mode: 'WALKING',
                   duration: { text: '8 mins' },
+                  line: 'N/A',
+                  vehicle: 'N/A',
                 },
               ],
             },
@@ -103,6 +105,9 @@ describe('actions', () => {
     };
 
     const initialState = {
+      alerts: {
+        alerts: {},
+      },
       configuration: {
         currentLocation: {
           address: '44 Tehama St, San Francisco, CA 94105',
@@ -151,5 +156,69 @@ describe('actions', () => {
     return store.dispatch(actions.fetchJourneys(5, 'home', 'work', '07:15am')).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
+  });
+});
+
+it('should fetch alerts from API', () => {
+  const mockApiFetchAlerts = jest.fn();
+  mockApiFetchAlerts.mockReturnValue(
+    Promise.resolve([
+      {
+        1: {
+          affectedLines: ['18', '52'],
+          description: 'Due to construction, Lines 18 and 52 will not serve any stops on Monroe Street between Jackson Street and San Pablo Avenue..',
+          subject: 'Lines 18 and 52 - Stop Closures near UC Village on Monroe Street and San Pablo Avenue',
+        }
+      },
+    ]),
+  );
+
+  const extraArgument = {
+    Api: {
+      fetchAlerts: mockApiFetchAlerts,
+    },
+  };
+
+  const initialState = {
+    alerts: {
+      alerts: {},
+    },
+    configuration: {
+      currentLocation: {
+        address: '44 Tehama St, San Francisco, CA 94105',
+      },
+    },
+    destinations: {
+      ids: [5],
+      byId: {
+        5: {
+          id: 5,
+          address: 'SFO, San Francisco, CA 94128',
+        },
+      },
+    },
+    journeys: {
+      byDestinationId: {},
+    },
+  };
+
+  const expectedActions = [
+    {
+      type: TYPES.ALERTS_RETRIEVED,
+      {
+        1: {
+          affectedLines: ['18', '52'],
+          description: 'Due to construction, Lines 18 and 52 will not serve any stops on Monroe Street between Jackson Street and San Pablo Avenue..',
+          subject: 'Lines 18 and 52 - Stop Closures near UC Village on Monroe Street and San Pablo Avenue',
+        },
+      },
+    },
+  ];
+
+  const mockStore = configureStore([thunk.withExtraArgument(extraArgument)]);
+  const store = mockStore(initialState);
+
+  return store.dispatch(actions.fetchAlerts()).then(() => {
+    expect(store.getAlerts()).toEqual(expectedActions);
   });
 });

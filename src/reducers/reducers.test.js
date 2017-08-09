@@ -4,6 +4,9 @@ import * as TYPES from '../constants/constants';
 describe('root reducer', () => {
   it('should return the initial state', () => {
     const expectedInitialState = {
+      alerts: {
+        alerts: {},
+      },
       configuration: {
         currentLocation: { address: '44 Tehama St, San Francisco, CA 94105' },
       },
@@ -21,6 +24,9 @@ describe('root reducer', () => {
 
   it('should handle action type UPDATE_CURRENT_LOCATION', () => {
     const oldState = {
+      alerts: {
+        alerts: {},
+      },
       configuration: {
         currentLocation: { address: '44 Tehama St, San Francisco, CA 94105' },
       },
@@ -41,6 +47,9 @@ describe('root reducer', () => {
     };
 
     const newState = {
+      alerts: {
+        alerts: {},
+      },
       configuration: {
         currentLocation: {
           address: '543 Howard St, San Francisco, CA 94105',
@@ -60,6 +69,9 @@ describe('root reducer', () => {
 
   it('should handle action type ADD_DESTINATION', () => {
     let oldState = {
+      alerts: {
+        alerts: {},
+      },
       configuration: {
         currentLocation: {
           address: '44 Tehama St, San Francisco, CA 94105',
@@ -80,6 +92,9 @@ describe('root reducer', () => {
     };
 
     let newState = {
+      alerts: {
+        alerts: {},
+      },
       configuration: {
         currentLocation: {
           address: '44 Tehama St, San Francisco, CA 94105',
@@ -109,6 +124,9 @@ describe('root reducer', () => {
     };
 
     newState = {
+      alerts: {
+        alerts: {},
+      },
       configuration: {
         currentLocation: {
           address: '44 Tehama St, San Francisco, CA 94105',
@@ -137,6 +155,9 @@ describe('root reducer', () => {
 
   it('should handle action type ADD_JOURNEYS', () => {
     let oldState = {
+      alerts: {
+        alerts: {},
+      },
       configuration: {
         currentLocation: {
           address: '44 Tehama St, San Francisco, CA 94105',
@@ -167,6 +188,9 @@ describe('root reducer', () => {
     };
 
     let newState = {
+      alerts: {
+        alerts: {},
+      },
       configuration: {
         currentLocation: {
           address: '44 Tehama St, San Francisco, CA 94105',
@@ -206,6 +230,9 @@ describe('root reducer', () => {
     };
 
     newState = {
+      alerts: {
+        alerts: {},
+      },
       configuration: {
         currentLocation: {
           address: '44 Tehama St, San Francisco, CA 94105',
@@ -240,6 +267,9 @@ describe('root reducer', () => {
 
   it('should handle action type REMOVE_JOURNEYS', () => {
     const oldState = {
+      alerts: {
+        alerts: {},
+      },
       configuration: {
         currentLocation: {
           address: '44 Tehama St, San Francisco, CA 94105',
@@ -278,6 +308,9 @@ describe('root reducer', () => {
     };
 
     const newState = {
+      alerts: {
+        alerts: {},
+      },
       configuration: {
         currentLocation: {
           address: '44 Tehama St, San Francisco, CA 94105',
@@ -312,6 +345,9 @@ describe('root reducer', () => {
 
   it('should handle action type REMOVE_DESTINATION', () => {
     const oldState = {
+      alerts: {
+        alerts: {},
+      },
       configuration: {
         currentLocation: {
           address: '44 Tehama St, San Francisco, CA 94105',
@@ -350,6 +386,9 @@ describe('root reducer', () => {
     };
 
     const newState = {
+      alerts: {
+        alerts: {},
+      },
       configuration: {
         currentLocation: {
           address: '44 Tehama St, San Francisco, CA 94105',
@@ -384,4 +423,81 @@ describe('root reducer', () => {
 
     expect(reducer(oldState, action)).toEqual(newState);
   });
+
+  it('should handle action type ALERTS_RETRIEVED', () => {
+    let oldState = {
+      alerts: {
+        alerts: {},
+      },
+      configuration: {
+        currentLocation: {
+          address: '44 Tehama St, San Francisco, CA 94105',
+        },
+      },
+      destinations: {
+        ids: [5, 6],
+        byId: {
+          5: {
+            id: 5,
+            address: 'SFO, San Francisco, CA 94128',
+          },
+          6: {
+            id: 6,
+            address: 'OAK, Oakland, CA 94234',
+          },
+        },
+      },
+      journeys: {
+        byDestinationId: {},
+      },
+    };
+
+    let action = {
+      type: TYPES.ALERTS_RETRIEVED,
+      {
+        1: {
+          affectedLines: ['18', '52'],
+          description: 'Due to construwction, Lines 18 and 52 will not serve any stops on Monroe Street between Jackson Street and San Pablo Avenue..',
+          subject: 'Lines 18 and 52 - Stop Closures near UC Village on Monroe Street and San Pablo Avenue'
+        }
+      },
+    }
+
+    let newState = {
+      alerts: {
+        alerts: {
+          1: {
+            affectedLines: ['18', '52'],
+            description: 'Due to construction, Lines 18 and 52 will not serve any stops on Monroe Street between Jackson Street and San Pablo Avenue..',
+            subject: 'Lines 18 and 52 - Stop Closures near UC Village on Monroe Street and San Pablo Avenue'
+          },
+        },
+      },
+      configuration: {
+        currentLocation: {
+          address: '44 Tehama St, San Francisco, CA 94105',
+        },
+      },
+      destinations: {
+        ids: [5, 6],
+        byId: {
+          5: {
+            id: 5,
+            address: 'SFO, San Francisco, CA 94128',
+          },
+          6: {
+            id: 6,
+            address: 'OAK, Oakland, CA 94234',
+          },
+        },
+      },
+      journeys: {
+        byDestinationId: {
+          5: [{ departureTime: '11:50pm', arrivalTime: '12:30am' }],
+        },
+      },
+    };
+
+    expect(reducer(oldState, action)).toEqual(newState);
+  })
 });
