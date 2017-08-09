@@ -7,6 +7,14 @@ export default class Api {
       .catch(e => e);
   }
 
+  static fetchAlerts() {
+    return fetch(
+      'http://localhost:8000/alerts',
+    )
+      .then(response => response.json())
+      .catch(e => e);
+  }
+
   static getCurrentLocation() {
     const getPosition = options => new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(resolve, reject, options);
