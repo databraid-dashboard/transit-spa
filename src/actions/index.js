@@ -83,7 +83,6 @@ export function fetchJourneys(destinationId, origin, destination) {
           });
         }
       });
-      console.log(journeyObj);
       return journeyObj;
     });
     return dispatch(addJourneys(destinationId, journeys));

@@ -9,7 +9,7 @@ import {
 } from './JourneyTable';
 import { fetchJourneys, fetchAlerts } from '../../actions';
 
-describe('JouwrneyTable', () => {
+describe('JourneyTable', () => {
   const testData = {
     destinationId: 1,
     origin: '',
@@ -58,6 +58,7 @@ describe('JouwrneyTable', () => {
         origin={testData.origin}
         destinationsById={testData.destinationsById}
         journeys={null}
+        alerts={null}
       />,
     );
     expect(toJson(component)).toMatchSnapshot();
@@ -74,6 +75,7 @@ describe('JouwrneyTable', () => {
 
   it('calls fetchJourneys on load', () => {
     const fetchJourneys = jest.fn();
+    const fetchAlerts = jest.fn();
     const component = mount(
       <JourneyTable
         id={1}
@@ -92,6 +94,7 @@ describe('JouwrneyTable', () => {
 
   it('calls fetchAlert on load', () => {
     const fetchJourneys = jest.fn();
+    const fetchAlerts = jest.fn();
     const component = mount(
       <JourneyTable
         id={1}
@@ -105,7 +108,7 @@ describe('JouwrneyTable', () => {
       />,
     );
 
-    expect(fetchAlerts.toHaveBeenCalled();
+    expect(fetchAlerts).toHaveBeenCalled();
   });
 });
 

@@ -454,10 +454,10 @@ describe('root reducer', () => {
 
     let action = {
       type: TYPES.ALERTS_RETRIEVED,
-      {
+      alerts: {
         1: {
           affectedLines: ['18', '52'],
-          description: 'Due to construwction, Lines 18 and 52 will not serve any stops on Monroe Street between Jackson Street and San Pablo Avenue..',
+          description: 'Due to construction, Lines 18 and 52 will not serve any stops on Monroe Street between Jackson Street and San Pablo Avenue..',
           subject: 'Lines 18 and 52 - Stop Closures near UC Village on Monroe Street and San Pablo Avenue'
         }
       },
@@ -492,9 +492,7 @@ describe('root reducer', () => {
         },
       },
       journeys: {
-        byDestinationId: {
-          5: [{ departureTime: '11:50pm', arrivalTime: '12:30am' }],
-        },
+        byDestinationId: {},
       },
     };
 
