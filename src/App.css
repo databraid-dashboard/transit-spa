@@ -4,19 +4,10 @@
 .transit-container {
 	height: inherit !important;
 }
-#root
-	> div
-	> div.react-grid-item.transit.react-draggable.cssTransforms.react-resizable
-	> div
-	> div {
+#root > div > div > div > div {
 	height: inherit !important;
 }
-#root
-	> div
-	> div.react-grid-item.transit.react-draggable.cssTransforms.react-resizable
-	> div
-	> div
-	> div {
+#root > div > div > div > div > div {
 	height: inherit !important;
 }
 #content-container {

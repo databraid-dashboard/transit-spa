@@ -8,7 +8,7 @@ import './App.css';
 const App = () =>
   (<div className="transit-container">
     <Container>
-      <Grid padded centered>
+      <Grid className="transit-container" padded centered>
         <Grid.Column id="content-container">
           <Grid.Row id="current-location-container">
             <CurrentLocation />
