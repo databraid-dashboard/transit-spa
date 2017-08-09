@@ -3,22 +3,21 @@ import { Grid, Container, Segment } from 'semantic-ui-react';
 import CurrentLocation from './components/CurrentLocation/CurrentLocation';
 import DestinationTable from './components/Destinations/DestinationTable';
 import AddNewDestinationRow from './components/AddNewDestination/AddNewDestinationRow';
-import './App.css';
+import './index.css';
 
 const App = () =>
   (<div className="transit-container">
-    <Container>
+    <Container className="transit-container">
       <Grid className="transit-container" padded centered>
-        <Grid.Column id="content-container">
+        <Grid.Column className="transit-container">
           <Grid.Row id="current-location-container">
             <CurrentLocation />
           </Grid.Row>
-
           <Grid.Row id="destinations-container">
             <DestinationTable />
           </Grid.Row>
 
-          <Grid.Row id="new-destination-container">
+          <Grid.Row className="transit-container">
             <Segment textAlign="center">
               <AddNewDestinationRow />
             </Segment>
