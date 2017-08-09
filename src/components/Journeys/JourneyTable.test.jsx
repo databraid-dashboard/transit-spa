@@ -1,13 +1,7 @@
 import React from 'react';
-import { shallow, render, mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import {
-  JourneyTable,
-  timeToLeaveConverter,
-  mapStateToProps,
-  mapDispatchToProps,
-} from './JourneyTable';
-import { fetchJourneys } from '../../actions';
+import { JourneyTable, timeToLeaveConverter, mapDispatchToProps } from './JourneyTable';
 
 describe('JourneyTable', () => {
   const testData = {
@@ -46,7 +40,7 @@ describe('JourneyTable', () => {
         affectedLines: ['18', '52'],
         description: 'Due to construction, Lines 18 and 52 will not serve any stops on Monroe Street between Jackson Street and San Pablo Avenue..',
         subject: 'Lines 18 and 52 - Stop Closures near UC Village on Monroe Street and San Pablo Avenue',
-      }
+      },
     },
   };
 
@@ -58,7 +52,6 @@ describe('JourneyTable', () => {
         origin={testData.origin}
         destinationsById={testData.destinationsById}
         journeys={null}
-        fetchJourneys={fetchJourneys}
       />,
     );
     expect(toJson(component)).toMatchSnapshot();
@@ -66,15 +59,13 @@ describe('JourneyTable', () => {
 
   it('mapDispatchToProps', () => {
     const dispatch = jest.fn();
-    const fetchJourneys = jest.fn();
-    const bindActionCreators = jest.fn();
 
     expect(mapDispatchToProps(dispatch)).toHaveProperty('fetchJourneys');
   });
 
   it('calls fetchJourneys on load', () => {
     const fetchJourneys = jest.fn();
-    const component = mount(
+    mount(
       <JourneyTable
         id={1}
         destinationId={testData.destinationId}

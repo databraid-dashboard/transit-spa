@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Container, Segment } from 'semantic-ui-react';
-import DestinationTable from './components/Destinations/DestinationTable';
+import { DestinationTable } from './components/Destinations/DestinationTable';
 import AddNewDestinationRow from './components/AddNewDestination/AddNewDestinationRow';
 import './App.css';
 

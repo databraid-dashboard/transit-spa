@@ -36,6 +36,41 @@ export function removeDestination(destinationId) {
   };
 }
 
+export function refreshJourneys(destinationId, origin, destination) {
+  return async (dispatch, getState, { Api }) => {
+    const json = await Api.fetchJourneys(origin, destination);
+
+    const journeys = json.map((rawJourneyObj) => {
+      const journeyObj = {
+        destination: rawJourneyObj.legs[0].end_address,
+        arrivalTimeText: rawJourneyObj.legs[0].arrival_time.text,
+        departureTimeUTC: rawJourneyObj.legs[0].departure_time.value,
+        transitSteps: rawJourneyObj.legs[0].steps.map((step) => {
+          const stepObj = {
+            instruction: step.html_instructions,
+            mode: step.travel_mode,
+            duration: step.duration.text,
+          };
+          return stepObj;
+        }),
+      };
+      return journeyObj;
+    });
+
+    const journeysOffset = journeys
+      .filter((journey) => {
+        const currentTimeInSeconds = Date.now() / 1000;
+        const diff = journey.departureTimeUTC - currentTimeInSeconds;
+        const offset = 1.5;
+        return diff >= offset;
+      })
+      .sort((a, b) => a - b);
+
+    dispatch(removeJourneys(destinationId));
+    dispatch(addJourneys(destinationId, journeysOffset));
+  };
+}
+
 export function fetchJourneys(destinationId, origin, destination) {
   return async (dispatch, getState, { Api }) => {
     const json = await Api.fetchJourneys(origin, destination);
@@ -54,6 +89,8 @@ export function fetchJourneys(destinationId, origin, destination) {
             duration: step.duration.text,
             line,
             vehicle,
+            shortName: step.transit_details ? step.transit_details.line.short_name : '',
+            agency: step.transit_details ? step.transit_details.line.agencies[0].name : '',
           };
           return stepObj;
         }),
@@ -64,9 +101,10 @@ export function fetchJourneys(destinationId, origin, destination) {
             if (alerts[alert].affectedLines) {
               journeyObj.alerts = [];
               alerts[alert].affectedLines.forEach((line) => {
-                journeyObj.transitSteps[transitStep].line == line ? journeyObj.alerts.push(alert.description) : null;
+                const jrnyStpsLne = journeyObj.transitSteps[transitStep].line;
+                if (jrnyStpsLne === parseInt(line, 10)) journeyObj.alerts.push(alert.description);
               });
-              !journeyObj.alerts[0] ? journeyObj.alerts[0] = 'on-time' : null;
+              if (!journeyObj.alerts[0]) journeyObj.alerts[0] = 'on-time';
             }
           });
         }
@@ -76,7 +114,7 @@ export function fetchJourneys(destinationId, origin, destination) {
     dispatch(addJourneys(destinationId, journeys));
     dispatch({
       type: TYPES.ALERTS_RETRIEVED,
-      alerts: alerts,
+      alerts,
     });
   };
 }

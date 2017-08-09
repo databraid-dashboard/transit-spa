@@ -3,34 +3,43 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { fetchJourneys, refreshJourneys } from '../../actions';
 
 import BestJourney from './BestJourney';
 import NextBestJourney from './NextBestJourney';
 
-import { fetchJourneys } from '../../actions';
-
 export function timeToLeaveConverter(departureTimeInSeconds) {
   const currentTimeInSeconds = Date.now() / 1000;
   const diff = departureTimeInSeconds - currentTimeInSeconds;
-
   return Math.floor(diff);
 }
 
 export class JourneyTable extends Component {
+  constructor(props) {
+    super(props);
+
+    this.callRefreshJourneys = this.callRefreshJourneys.bind(this);
+  }
+
   componentDidMount() {
     const { destinationId, origin, destinationsById } = this.props;
-      this.props.fetchJourneys(destinationId, origin, destinationsById[destinationId].address);
+    this.props.fetchJourneys(destinationId, origin, destinationsById[destinationId].address);
+  }
+
+  callRefreshJourneys() {
+    const { destinationId, origin, destinationsById } = this.props;
+    this.props.refreshJourneys(destinationId, origin, destinationsById[destinationId].address);
   }
 
   render() {
     const { journeys } = this.props;
 
-    if (!journeys) return <div>Loading...</div>;
+    if (!journeys || journeys.length === 0) return <div>Loading...</div>;
 
     const bestJourney = journeys[0];
     const nextBestJourney = journeys[1];
-    const bestJourneyStatus = bestJourney.alerts ?  bestJourney.alerts[0] : 'on-time';
-    const nextBestJourneyStatus = nextBestJourney.alerts ? nextBestJourney.alerts[0]: 'on-time';
+    const bestJourneyStatus = bestJourney.alerts ? bestJourney.alerts[0] : 'on-time';
+    const nextBestJourneyStatus = nextBestJourney.alerts ? nextBestJourney.alerts[0] : 'on-time';
 
     const timeToLeaveBest = timeToLeaveConverter(bestJourney.departureTimeUTC);
     const timeToLeaveNextBest = timeToLeaveConverter(nextBestJourney.departureTimeUTC);
@@ -42,12 +51,14 @@ export class JourneyTable extends Component {
           steps={bestJourney.transitSteps}
           eta={bestJourney.arrivalTimeText}
           conditionStatus={bestJourneyStatus}
+          callRefreshJourneys={this.callRefreshJourneys}
         />
         <NextBestJourney
           timeToLeaveInSeconds={timeToLeaveNextBest}
           steps={nextBestJourney.transitSteps}
           eta={nextBestJourney.arrivalTimeText}
           conditionStatus={nextBestJourneyStatus}
+          callRefreshJourneys={this.callRefreshJourneys}
         />
       </div>
     );
@@ -61,6 +72,7 @@ JourneyTable.propTypes = {
     1: PropTypes.object,
   }).isRequired,
   fetchJourneys: PropTypes.func.isRequired,
+  refreshJourneys: PropTypes.func.isRequired,
   journeys: PropTypes.arrayOf(PropTypes.object),
 };
 
@@ -69,6 +81,7 @@ JourneyTable.defaultProps = {
   origin: '',
   destinationsById: { 1: {} },
   fetchJourneys: () => {},
+  refreshJourneys: () => {},
   journeys: [
     {
       departureTimeUTC: Date.now(),
@@ -116,6 +129,7 @@ export const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       fetchJourneys,
+      refreshJourneys,
     },
     dispatch,
   );

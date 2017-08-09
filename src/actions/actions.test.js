@@ -156,6 +156,8 @@ describe('actions', () => {
                 duration: '8 mins',
                 vehicle: 'N/A',
                 line: 'N/A',
+                shortName: '',
+                agency: '',
               },
             ],
             alerts: ['on-time'],
