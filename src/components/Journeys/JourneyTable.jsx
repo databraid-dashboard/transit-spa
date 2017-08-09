@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import BestJourney from './BestJourney';
 import NextBestJourney from './NextBestJourney';
 
-import { fetchJourneys, fetchAlerts } from '../../actions';
+import { fetchJourneys } from '../../actions';
 
 export function timeToLeaveConverter(departureTimeInSeconds) {
   const currentTimeInSeconds = Date.now() / 1000;
@@ -19,10 +19,7 @@ export function timeToLeaveConverter(departureTimeInSeconds) {
 export class JourneyTable extends Component {
   componentDidMount() {
     const { destinationId, origin, destinationsById } = this.props;
-    this.props.fetchAlerts()
-    .then(() => {
       this.props.fetchJourneys(destinationId, origin, destinationsById[destinationId].address);
-    });
   }
 
   render() {
@@ -64,11 +61,7 @@ JourneyTable.propTypes = {
     1: PropTypes.object,
   }).isRequired,
   fetchJourneys: PropTypes.func.isRequired,
-  journeys: PropTypes.arrayOf(PropTypes.object).isRequired,
-  alerts: PropTypes.shape({
-    1: PropTypes.object,
-  }).isRequired,
-  fetchAlerts: PropTypes.func.isRequired,
+  journeys: PropTypes.arrayOf(PropTypes.object),
 };
 
 JourneyTable.defaultProps = {
@@ -123,7 +116,6 @@ export const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       fetchJourneys,
-      fetchAlerts,
     },
     dispatch,
   );

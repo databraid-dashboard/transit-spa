@@ -7,7 +7,7 @@ import {
   mapStateToProps,
   mapDispatchToProps,
 } from './JourneyTable';
-import { fetchJourneys, fetchAlerts } from '../../actions';
+import { fetchJourneys } from '../../actions';
 
 describe('JourneyTable', () => {
   const testData = {
@@ -58,7 +58,7 @@ describe('JourneyTable', () => {
         origin={testData.origin}
         destinationsById={testData.destinationsById}
         journeys={null}
-        alerts={null}
+        fetchJourneys={fetchJourneys}
       />,
     );
     expect(toJson(component)).toMatchSnapshot();
@@ -67,7 +67,6 @@ describe('JourneyTable', () => {
   it('mapDispatchToProps', () => {
     const dispatch = jest.fn();
     const fetchJourneys = jest.fn();
-    const fetchAlerts = jest.fn();
     const bindActionCreators = jest.fn();
 
     expect(mapDispatchToProps(dispatch)).toHaveProperty('fetchJourneys');
@@ -75,7 +74,6 @@ describe('JourneyTable', () => {
 
   it('calls fetchJourneys on load', () => {
     const fetchJourneys = jest.fn();
-    const fetchAlerts = jest.fn();
     const component = mount(
       <JourneyTable
         id={1}
@@ -83,32 +81,11 @@ describe('JourneyTable', () => {
         origin={testData.origin}
         destinationsById={testData.destinationsById}
         journeys={testData.journeys}
-        alerts={testData.alerts}
         fetchJourneys={fetchJourneys}
-        fetchAlerts={fetchAlerts}
       />,
     );
 
     expect(fetchJourneys).toHaveBeenCalled();
-  });
-
-  it('calls fetchAlert on load', () => {
-    const fetchJourneys = jest.fn();
-    const fetchAlerts = jest.fn();
-    const component = mount(
-      <JourneyTable
-        id={1}
-        destinationId={testData.destinationId}
-        origin={testData.origin}
-        destinationsById={testData.destinationsById}
-        journeys={testData.journeys}
-        alerts={testData.alerts}
-        fetchJourneys={fetchJourneys}
-        fetchAlerts={fetchAlerts}
-      />,
-    );
-
-    expect(fetchAlerts).toHaveBeenCalled();
   });
 });
 

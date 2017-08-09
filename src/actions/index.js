@@ -36,22 +36,10 @@ export function removeDestination(destinationId) {
   };
 }
 
-export function fetchAlerts() {
-  return async (dispatch, getState, { Api }) => {
-    const alertsById = await Api.fetchAlerts();
-    dispatch({
-      type: TYPES.ALERTS_RETRIEVED,
-      alerts: alertsById,
-    });
-    return alertsById;
-  };
-}
-
 export function fetchJourneys(destinationId, origin, destination) {
   return async (dispatch, getState, { Api }) => {
     const json = await Api.fetchJourneys(origin, destination);
-    const state = getState();
-    const alerts = state.alerts.alerts;
+    const alerts = await Api.fetchAlerts();
     const journeys = json.map((rawJourneyObj) => {
       const journeyObj = {
         destination: rawJourneyObj.legs[0].end_address,
@@ -85,6 +73,10 @@ export function fetchJourneys(destinationId, origin, destination) {
       });
       return journeyObj;
     });
-    return dispatch(addJourneys(destinationId, journeys));
+    dispatch(addJourneys(destinationId, journeys));
+    dispatch({
+      type: TYPES.ALERTS_RETRIEVED,
+      alerts: alerts,
+    });
   };
 }
