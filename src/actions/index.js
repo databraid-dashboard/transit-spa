@@ -45,12 +45,9 @@ export function removeDestination(destinationId) {
 }
 
 export function refreshJourneys(destinationId, origin, destination) {
-  return async (dispatch, getState, { Api }) => {
-    const json = await Api.fetchJourneys(origin, destination);
-    const alerts = await Api.fetchAlerts();
   return async (dispatch, getState, { TRANSIT_API }) => {
     const json = await TRANSIT_API.fetchJourneys(origin, destination);
-    const alerts = await Api.fetchAlerts();
+    const alerts = await TRANSIT_API.fetchAlerts();
     const journeys = json.map((rawJourneyObj) => {
       const journeyObj = {
         destination: rawJourneyObj.legs[0].end_address,
@@ -89,13 +86,13 @@ export function refreshJourneys(destinationId, origin, destination) {
     });
 
     const journeysOffset = journeys
-      .filter((journey) => {
-        const currentTimeInSeconds = Date.now() / 1000;
-        const diff = journey.departureTimeUTC - currentTimeInSeconds;
-        const offset = 1.5;
-        return diff >= offset;
-      })
-      .sort((a, b) => a - b);
+    .filter((journey) => {
+      const currentTimeInSeconds = Date.now() / 1000;
+      const diff = journey.departureTimeUTC - currentTimeInSeconds;
+      const offset = 1.5;
+      return diff >= offset;
+    })
+    .sort((a, b) => a - b);
 
     dispatch(removeJourneys(destinationId));
     dispatch(addJourneys(destinationId, journeysOffset));
@@ -105,7 +102,7 @@ export function refreshJourneys(destinationId, origin, destination) {
 export function fetchJourneys(destinationId, origin, destination) {
   return async (dispatch, getState, { TRANSIT_API }) => {
     const json = await TRANSIT_API.fetchJourneys(origin, destination);
-    const alerts = await Api.fetchAlerts();
+    const alerts = await TRANSIT_API.fetchAlerts();
     const journeys = json.map((rawJourneyObj) => {
       const journeyObj = {
         destination: rawJourneyObj.legs[0].end_address,
