@@ -96,9 +96,27 @@ export function alerts(state = { alerts: {} }, action) {
   }
 }
 
-export default combineReducers({
+export const transit = combineReducers({
   configuration,
   destinations,
   journeys,
   alerts,
 });
+
+const initialState = {
+  ids: [TYPES.WIDGET_ID],
+  byId: {},
+};
+
+const widgets = (state = initialState, action) => ({
+  ...state,
+  byId: {
+    [TYPES.WIDGET_ID]: transit(state.byId[TYPES.WIDGET_ID], action),
+  },
+});
+
+const rootReducer = combineReducers({
+  widgets,
+});
+
+export default rootReducer;

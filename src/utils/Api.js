@@ -1,7 +1,9 @@
+const apiUrl = process.env.REACT_APP_API_SERVER_URL;
+
 export default class Api {
   static fetchJourneys(origin, destination) {
     return fetch(
-      `http://localhost:8000/directions?origin=${origin}&destination=${destination}&alternatives=true`,
+      `${apiUrl}/directions?origin=${origin}&destination=${destination}&alternatives=true`,
     )
       .then(response => response.json())
       .catch(e => e);
@@ -9,7 +11,7 @@ export default class Api {
 
   static fetchAlerts() {
     return fetch(
-      'http://localhost:8000/alerts',
+      `${apiUrl}/alerts`,
     )
       .then(response => response.json())
       .catch(e => e);

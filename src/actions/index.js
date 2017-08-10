@@ -47,21 +47,41 @@ export function removeDestination(destinationId) {
 export function refreshJourneys(destinationId, origin, destination) {
   return async (dispatch, getState, { Api }) => {
     const json = await Api.fetchJourneys(origin, destination);
-
+    const alerts = await Api.fetchAlerts();
     const journeys = json.map((rawJourneyObj) => {
       const journeyObj = {
         destination: rawJourneyObj.legs[0].end_address,
         arrivalTimeText: rawJourneyObj.legs[0].arrival_time.text,
         departureTimeUTC: rawJourneyObj.legs[0].departure_time.value,
         transitSteps: rawJourneyObj.legs[0].steps.map((step) => {
+          const line = step.transit_details ? step.transit_details.line.short_name : 'N/A';
+          const vehicle = step.transit_details ? step.transit_details.line.vehicle.name : 'N/A';
           const stepObj = {
             instruction: step.html_instructions,
             mode: step.travel_mode,
             duration: step.duration.text,
+            line,
+            vehicle,
+            shortName: step.transit_details ? step.transit_details.line.short_name : '',
+            agency: step.transit_details ? step.transit_details.line.agencies[0].name : '',
           };
           return stepObj;
         }),
       };
+      Object.keys(journeyObj.transitSteps).forEach((transitStep) => {
+        if (journeyObj.transitSteps[transitStep]) {
+          Object.keys(alerts).forEach((alert) => {
+            if (alerts[alert].affectedLines) {
+              journeyObj.alerts = [];
+              alerts[alert].affectedLines.forEach((line) => {
+                const jrnyStpsLne = journeyObj.transitSteps[transitStep].line;
+                if (jrnyStpsLne === parseInt(line, 10)) journeyObj.alerts.push(alert.description);
+              });
+              if (!journeyObj.alerts[0]) journeyObj.alerts[0] = 'on-time';
+            }
+          });
+        }
+      });
       return journeyObj;
     });
 

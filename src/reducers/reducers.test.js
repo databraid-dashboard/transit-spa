@@ -4,22 +4,30 @@ import * as TYPES from '../constants/constants';
 describe('root reducer', () => {
   it('should return the initial state', () => {
     const expectedInitialState = {
-      alerts: {
-        alerts: {},
-      },
-      configuration: {
-        geolocating: true,
-        currentLocation: {
-          address: '44 Tehama St, San Francisco, CA 94105',
-          lat: 37.7873889,
-          lng: -122.3964106 },
-      },
-      destinations: {
-        ids: [],
-        byId: {},
-      },
-      journeys: {
-        byDestinationId: {},
+      widgets: {
+        byId: {
+          transit: {
+            alerts: {
+              alerts: {},
+            },
+            configuration: {
+              geolocating: true,
+              currentLocation: {
+                address: '44 Tehama St, San Francisco, CA 94105',
+                lat: 37.7873889,
+                lng: -122.3964106,
+              },
+            },
+            destinations: {
+              ids: [],
+              byId: {},
+            },
+            journeys: {
+              byDestinationId: {},
+            },
+          },
+        },
+        ids: ['transit'],
       },
     };
 
@@ -28,23 +36,30 @@ describe('root reducer', () => {
 
   it('should handle action type UPDATE_CURRENT_LOCATION', () => {
     const oldState = {
-      alerts: {
-        alerts: {},
-      },
-      configuration: {
-        geolocating: true,
-        currentLocation: {
-          address: '44 Tehama St, San Francisco, CA 94105',
-          lat: 37.7873889,
-          lng: -122.3964106,
+      widgets: {
+        byId: {
+          transit: {
+            alerts: {
+              alerts: {},
+            },
+            configuration: {
+              geolocating: true,
+              currentLocation: {
+                address: '44 Tehama St, San Francisco, CA 94105',
+                lat: 37.7873889,
+                lng: -122.3964106,
+              },
+            },
+            destinations: {
+              ids: [],
+              byId: {},
+            },
+            journeys: {
+              byDestinationId: {},
+            },
+          },
         },
-      },
-      destinations: {
-        ids: [],
-        byId: {},
-      },
-      journeys: {
-        byDestinationId: {},
+        ids: ['transit'],
       },
     };
 
@@ -59,23 +74,30 @@ describe('root reducer', () => {
     };
 
     const newState = {
-      alerts: {
-        alerts: {},
-      },
-      configuration: {
-        geolocating: false,
-        currentLocation: {
-          address: '543 Howard St, San Francisco, CA 94105',
-          lat: 37.123456,
-          lng: -122.123456,
+      widgets: {
+        byId: {
+          transit: {
+            alerts: {
+              alerts: {},
+            },
+            configuration: {
+              geolocating: false,
+              currentLocation: {
+                address: '543 Howard St, San Francisco, CA 94105',
+                lat: 37.123456,
+                lng: -122.123456,
+              },
+            },
+            destinations: {
+              ids: [],
+              byId: {},
+            },
+            journeys: {
+              byDestinationId: {},
+            },
+          },
         },
-      },
-      destinations: {
-        ids: [],
-        byId: {},
-      },
-      journeys: {
-        byDestinationId: {},
+        ids: ['transit'],
       },
     };
 
@@ -84,20 +106,27 @@ describe('root reducer', () => {
 
   it('should handle action type ADD_DESTINATION', () => {
     let oldState = {
-      alerts: {
-        alerts: {},
-      },
-      configuration: {
-        currentLocation: {
-          address: '44 Tehama St, San Francisco, CA 94105',
+      widgets: {
+        byId: {
+          transit: {
+            alerts: {
+              alerts: {},
+            },
+            configuration: {
+              currentLocation: {
+                address: '44 Tehama St, San Francisco, CA 94105',
+              },
+            },
+            destinations: {
+              ids: [],
+              byId: {},
+            },
+            journeys: {
+              byDestinationId: {},
+            },
+          },
         },
-      },
-      destinations: {
-        ids: [],
-        byId: {},
-      },
-      journeys: {
-        byDestinationId: {},
+        ids: ['transit'],
       },
     };
 
@@ -107,25 +136,32 @@ describe('root reducer', () => {
     };
 
     let newState = {
-      alerts: {
-        alerts: {},
-      },
-      configuration: {
-        currentLocation: {
-          address: '44 Tehama St, San Francisco, CA 94105',
-        },
-      },
-      destinations: {
-        ids: [1],
+      widgets: {
         byId: {
-          1: {
-            id: 1,
-            address: 'SFO, San Francisco, CA 94128',
+          transit: {
+            alerts: {
+              alerts: {},
+            },
+            configuration: {
+              currentLocation: {
+                address: '44 Tehama St, San Francisco, CA 94105',
+              },
+            },
+            destinations: {
+              ids: [1],
+              byId: {
+                1: {
+                  id: 1,
+                  address: 'SFO, San Francisco, CA 94128',
+                },
+              },
+            },
+            journeys: {
+              byDestinationId: {},
+            },
           },
         },
-      },
-      journeys: {
-        byDestinationId: {},
+        ids: ['transit'],
       },
     };
 
@@ -139,29 +175,36 @@ describe('root reducer', () => {
     };
 
     newState = {
-      alerts: {
-        alerts: {},
-      },
-      configuration: {
-        currentLocation: {
-          address: '44 Tehama St, San Francisco, CA 94105',
-        },
-      },
-      destinations: {
-        ids: [1, 2],
+      widgets: {
         byId: {
-          1: {
-            id: 1,
-            address: 'SFO, San Francisco, CA 94128',
-          },
-          2: {
-            id: 2,
-            address: 'OAK, Oakland, CA 94234',
+          transit: {
+            alerts: {
+              alerts: {},
+            },
+            configuration: {
+              currentLocation: {
+                address: '44 Tehama St, San Francisco, CA 94105',
+              },
+            },
+            destinations: {
+              ids: [1, 2],
+              byId: {
+                1: {
+                  id: 1,
+                  address: 'SFO, San Francisco, CA 94128',
+                },
+                2: {
+                  id: 2,
+                  address: 'OAK, Oakland, CA 94234',
+                },
+              },
+            },
+            journeys: {
+              byDestinationId: {},
+            },
           },
         },
-      },
-      journeys: {
-        byDestinationId: {},
+        ids: ['transit'],
       },
     };
 
@@ -170,29 +213,36 @@ describe('root reducer', () => {
 
   it('should handle action type ADD_JOURNEYS', () => {
     let oldState = {
-      alerts: {
-        alerts: {},
-      },
-      configuration: {
-        currentLocation: {
-          address: '44 Tehama St, San Francisco, CA 94105',
-        },
-      },
-      destinations: {
-        ids: [5, 6],
+      widgets: {
         byId: {
-          5: {
-            id: 5,
-            address: 'SFO, San Francisco, CA 94128',
-          },
-          6: {
-            id: 6,
-            address: 'OAK, Oakland, CA 94234',
+          transit: {
+            alerts: {
+              alerts: {},
+            },
+            configuration: {
+              currentLocation: {
+                address: '44 Tehama St, San Francisco, CA 94105',
+              },
+            },
+            destinations: {
+              ids: [5, 6],
+              byId: {
+                5: {
+                  id: 5,
+                  address: 'SFO, San Francisco, CA 94128',
+                },
+                6: {
+                  id: 6,
+                  address: 'OAK, Oakland, CA 94234',
+                },
+              },
+            },
+            journeys: {
+              byDestinationId: {},
+            },
           },
         },
-      },
-      journeys: {
-        byDestinationId: {},
+        ids: ['transit'],
       },
     };
 
@@ -203,31 +253,38 @@ describe('root reducer', () => {
     };
 
     let newState = {
-      alerts: {
-        alerts: {},
-      },
-      configuration: {
-        currentLocation: {
-          address: '44 Tehama St, San Francisco, CA 94105',
-        },
-      },
-      destinations: {
-        ids: [5, 6],
+      widgets: {
         byId: {
-          5: {
-            id: 5,
-            address: 'SFO, San Francisco, CA 94128',
-          },
-          6: {
-            id: 6,
-            address: 'OAK, Oakland, CA 94234',
+          transit: {
+            alerts: {
+              alerts: {},
+            },
+            configuration: {
+              currentLocation: {
+                address: '44 Tehama St, San Francisco, CA 94105',
+              },
+            },
+            destinations: {
+              ids: [5, 6],
+              byId: {
+                5: {
+                  id: 5,
+                  address: 'SFO, San Francisco, CA 94128',
+                },
+                6: {
+                  id: 6,
+                  address: 'OAK, Oakland, CA 94234',
+                },
+              },
+            },
+            journeys: {
+              byDestinationId: {
+                5: [{ departureTime: '11:50pm', arrivalTime: '12:30am' }],
+              },
+            },
           },
         },
-      },
-      journeys: {
-        byDestinationId: {
-          5: [{ departureTime: '11:50pm', arrivalTime: '12:30am' }],
-        },
+        ids: ['transit'],
       },
     };
 
@@ -245,35 +302,42 @@ describe('root reducer', () => {
     };
 
     newState = {
-      alerts: {
-        alerts: {},
-      },
-      configuration: {
-        currentLocation: {
-          address: '44 Tehama St, San Francisco, CA 94105',
-        },
-      },
-      destinations: {
-        ids: [5, 6],
+      widgets: {
         byId: {
-          5: {
-            id: 5,
-            address: 'SFO, San Francisco, CA 94128',
-          },
-          6: {
-            id: 6,
-            address: 'OAK, Oakland, CA 94234',
+          transit: {
+            alerts: {
+              alerts: {},
+            },
+            configuration: {
+              currentLocation: {
+                address: '44 Tehama St, San Francisco, CA 94105',
+              },
+            },
+            destinations: {
+              ids: [5, 6],
+              byId: {
+                5: {
+                  id: 5,
+                  address: 'SFO, San Francisco, CA 94128',
+                },
+                6: {
+                  id: 6,
+                  address: 'OAK, Oakland, CA 94234',
+                },
+              },
+            },
+            journeys: {
+              byDestinationId: {
+                5: [
+                  { departureTime: '11:50pm', arrivalTime: '12:30am' },
+                  { departureTime: '11:55pm', arrivalTime: '12:45am' },
+                  { departureTime: '11:58pm', arrivalTime: '12:48am' },
+                ],
+              },
+            },
           },
         },
-      },
-      journeys: {
-        byDestinationId: {
-          5: [
-            { departureTime: '11:50pm', arrivalTime: '12:30am' },
-            { departureTime: '11:55pm', arrivalTime: '12:45am' },
-            { departureTime: '11:58pm', arrivalTime: '12:48am' },
-          ],
-        },
+        ids: ['transit'],
       },
     };
 
@@ -282,38 +346,45 @@ describe('root reducer', () => {
 
   it('should handle action type REMOVE_JOURNEYS', () => {
     const oldState = {
-      alerts: {
-        alerts: {},
-      },
-      configuration: {
-        currentLocation: {
-          address: '44 Tehama St, San Francisco, CA 94105',
-        },
-      },
-      destinations: {
-        ids: [5, 6],
+      widgets: {
         byId: {
-          5: {
-            id: 5,
-            address: 'SFO, San Francisco, CA 94128',
-          },
-          6: {
-            id: 6,
-            address: 'OAK, Oakland, CA 94234',
+          transit: {
+            alerts: {
+              alerts: {},
+            },
+            configuration: {
+              currentLocation: {
+                address: '44 Tehama St, San Francisco, CA 94105',
+              },
+            },
+            destinations: {
+              ids: [5, 6],
+              byId: {
+                5: {
+                  id: 5,
+                  address: 'SFO, San Francisco, CA 94128',
+                },
+                6: {
+                  id: 6,
+                  address: 'OAK, Oakland, CA 94234',
+                },
+              },
+            },
+            journeys: {
+              byDestinationId: {
+                5: [
+                  { departureTime: '11:50pm', arrivalTime: '12:30am' },
+                  { departureTime: '11:55pm', arrivalTime: '12:45am' },
+                ],
+                6: [
+                  { departureTime: '11:50pm', arrivalTime: '12:30am' },
+                  { departureTime: '11:55pm', arrivalTime: '12:45am' },
+                ],
+              },
+            },
           },
         },
-      },
-      journeys: {
-        byDestinationId: {
-          5: [
-            { departureTime: '11:50pm', arrivalTime: '12:30am' },
-            { departureTime: '11:55pm', arrivalTime: '12:45am' },
-          ],
-          6: [
-            { departureTime: '11:50pm', arrivalTime: '12:30am' },
-            { departureTime: '11:55pm', arrivalTime: '12:45am' },
-          ],
-        },
+        ids: ['transit'],
       },
     };
 
@@ -323,35 +394,42 @@ describe('root reducer', () => {
     };
 
     const newState = {
-      alerts: {
-        alerts: {},
-      },
-      configuration: {
-        currentLocation: {
-          address: '44 Tehama St, San Francisco, CA 94105',
-        },
-      },
-      destinations: {
-        ids: [5, 6],
+      widgets: {
         byId: {
-          5: {
-            id: 5,
-            address: 'SFO, San Francisco, CA 94128',
-          },
-          6: {
-            id: 6,
-            address: 'OAK, Oakland, CA 94234',
+          transit: {
+            alerts: {
+              alerts: {},
+            },
+            configuration: {
+              currentLocation: {
+                address: '44 Tehama St, San Francisco, CA 94105',
+              },
+            },
+            destinations: {
+              ids: [5, 6],
+              byId: {
+                5: {
+                  id: 5,
+                  address: 'SFO, San Francisco, CA 94128',
+                },
+                6: {
+                  id: 6,
+                  address: 'OAK, Oakland, CA 94234',
+                },
+              },
+            },
+            journeys: {
+              byDestinationId: {
+                5: [],
+                6: [
+                  { departureTime: '11:50pm', arrivalTime: '12:30am' },
+                  { departureTime: '11:55pm', arrivalTime: '12:45am' },
+                ],
+              },
+            },
           },
         },
-      },
-      journeys: {
-        byDestinationId: {
-          5: [],
-          6: [
-            { departureTime: '11:50pm', arrivalTime: '12:30am' },
-            { departureTime: '11:55pm', arrivalTime: '12:45am' },
-          ],
-        },
+        ids: ['transit'],
       },
     };
 
@@ -360,38 +438,45 @@ describe('root reducer', () => {
 
   it('should handle action type REMOVE_DESTINATION', () => {
     const oldState = {
-      alerts: {
-        alerts: {},
-      },
-      configuration: {
-        currentLocation: {
-          address: '44 Tehama St, San Francisco, CA 94105',
-        },
-      },
-      destinations: {
-        ids: [5, 6],
+      widgets: {
         byId: {
-          5: {
-            id: 5,
-            address: 'SFO, San Francisco, CA 94128',
-          },
-          6: {
-            id: 6,
-            address: 'OAK, Oakland, CA 94234',
+          transit: {
+            alerts: {
+              alerts: {},
+            },
+            configuration: {
+              currentLocation: {
+                address: '44 Tehama St, San Francisco, CA 94105',
+              },
+            },
+            destinations: {
+              ids: [5, 6],
+              byId: {
+                5: {
+                  id: 5,
+                  address: 'SFO, San Francisco, CA 94128',
+                },
+                6: {
+                  id: 6,
+                  address: 'OAK, Oakland, CA 94234',
+                },
+              },
+            },
+            journeys: {
+              byDestinationId: {
+                5: [
+                  { departureTime: '11:50pm', arrivalTime: '12:30am' },
+                  { departureTime: '11:55pm', arrivalTime: '12:45am' },
+                ],
+                6: [
+                  { departureTime: '11:50pm', arrivalTime: '12:30am' },
+                  { departureTime: '11:55pm', arrivalTime: '12:45am' },
+                ],
+              },
+            },
           },
         },
-      },
-      journeys: {
-        byDestinationId: {
-          5: [
-            { departureTime: '11:50pm', arrivalTime: '12:30am' },
-            { departureTime: '11:55pm', arrivalTime: '12:45am' },
-          ],
-          6: [
-            { departureTime: '11:50pm', arrivalTime: '12:30am' },
-            { departureTime: '11:55pm', arrivalTime: '12:45am' },
-          ],
-        },
+        ids: ['transit'],
       },
     };
 
@@ -401,38 +486,45 @@ describe('root reducer', () => {
     };
 
     const newState = {
-      alerts: {
-        alerts: {},
-      },
-      configuration: {
-        currentLocation: {
-          address: '44 Tehama St, San Francisco, CA 94105',
-        },
-      },
-      destinations: {
-        ids: [6],
+      widgets: {
         byId: {
-          5: {
-            id: 5,
-            address: 'SFO, San Francisco, CA 94128',
-          },
-          6: {
-            id: 6,
-            address: 'OAK, Oakland, CA 94234',
+          transit: {
+            alerts: {
+              alerts: {},
+            },
+            configuration: {
+              currentLocation: {
+                address: '44 Tehama St, San Francisco, CA 94105',
+              },
+            },
+            destinations: {
+              ids: [6],
+              byId: {
+                5: {
+                  id: 5,
+                  address: 'SFO, San Francisco, CA 94128',
+                },
+                6: {
+                  id: 6,
+                  address: 'OAK, Oakland, CA 94234',
+                },
+              },
+            },
+            journeys: {
+              byDestinationId: {
+                5: [
+                  { departureTime: '11:50pm', arrivalTime: '12:30am' },
+                  { departureTime: '11:55pm', arrivalTime: '12:45am' },
+                ],
+                6: [
+                  { departureTime: '11:50pm', arrivalTime: '12:30am' },
+                  { departureTime: '11:55pm', arrivalTime: '12:45am' },
+                ],
+              },
+            },
           },
         },
-      },
-      journeys: {
-        byDestinationId: {
-          5: [
-            { departureTime: '11:50pm', arrivalTime: '12:30am' },
-            { departureTime: '11:55pm', arrivalTime: '12:45am' },
-          ],
-          6: [
-            { departureTime: '11:50pm', arrivalTime: '12:30am' },
-            { departureTime: '11:55pm', arrivalTime: '12:45am' },
-          ],
-        },
+        ids: ['transit'],
       },
     };
 
@@ -441,29 +533,45 @@ describe('root reducer', () => {
 
   it('should handle action type ALERTS_RETRIEVED', () => {
     const oldState = {
-      alerts: {
-        alerts: {},
-      },
-      configuration: {
-        currentLocation: {
-          address: '44 Tehama St, San Francisco, CA 94105',
-        },
-      },
-      destinations: {
-        ids: [5, 6],
+      widgets: {
         byId: {
-          5: {
-            id: 5,
-            address: 'SFO, San Francisco, CA 94128',
-          },
-          6: {
-            id: 6,
-            address: 'OAK, Oakland, CA 94234',
+          transit: {
+            alerts: {
+              alerts: {},
+            },
+            configuration: {
+              currentLocation: {
+                address: '44 Tehama St, San Francisco, CA 94105',
+              },
+            },
+            destinations: {
+              ids: [5, 6],
+              byId: {
+                5: {
+                  id: 5,
+                  address: 'SFO, San Francisco, CA 94128',
+                },
+                6: {
+                  id: 6,
+                  address: 'OAK, Oakland, CA 94234',
+                },
+              },
+            },
+            journeys: {
+              byDestinationId: {
+                5: [
+                  { departureTime: '11:50pm', arrivalTime: '12:30am' },
+                  { departureTime: '11:55pm', arrivalTime: '12:45am' },
+                ],
+                6: [
+                  { departureTime: '11:50pm', arrivalTime: '12:30am' },
+                  { departureTime: '11:55pm', arrivalTime: '12:45am' },
+                ],
+              },
+            },
           },
         },
-      },
-      journeys: {
-        byDestinationId: {},
+        ids: ['transit'],
       },
     };
 
@@ -479,35 +587,51 @@ describe('root reducer', () => {
     };
 
     const newState = {
-      alerts: {
-        alerts: {
-          1: {
-            affectedLines: ['18', '52'],
-            description: 'Due to construction, Lines 18 and 52 will not serve any stops on Monroe Street between Jackson Street and San Pablo Avenue..',
-            subject: 'Lines 18 and 52 - Stop Closures near UC Village on Monroe Street and San Pablo Avenue',
-          },
-        },
-      },
-      configuration: {
-        currentLocation: {
-          address: '44 Tehama St, San Francisco, CA 94105',
-        },
-      },
-      destinations: {
-        ids: [5, 6],
+      widgets: {
         byId: {
-          5: {
-            id: 5,
-            address: 'SFO, San Francisco, CA 94128',
-          },
-          6: {
-            id: 6,
-            address: 'OAK, Oakland, CA 94234',
+          transit: {
+            alerts: {
+              alerts: {
+                1: {
+                  affectedLines: ['18', '52'],
+                  description: 'Due to construction, Lines 18 and 52 will not serve any stops on Monroe Street between Jackson Street and San Pablo Avenue..',
+                  subject: 'Lines 18 and 52 - Stop Closures near UC Village on Monroe Street and San Pablo Avenue',
+                },
+              },
+            },
+            configuration: {
+              currentLocation: {
+                address: '44 Tehama St, San Francisco, CA 94105',
+              },
+            },
+            destinations: {
+              ids: [5, 6],
+              byId: {
+                5: {
+                  id: 5,
+                  address: 'SFO, San Francisco, CA 94128',
+                },
+                6: {
+                  id: 6,
+                  address: 'OAK, Oakland, CA 94234',
+                },
+              },
+            },
+            journeys: {
+              byDestinationId: {
+                5: [
+                  { departureTime: '11:50pm', arrivalTime: '12:30am' },
+                  { departureTime: '11:55pm', arrivalTime: '12:45am' },
+                ],
+                6: [
+                  { departureTime: '11:50pm', arrivalTime: '12:30am' },
+                  { departureTime: '11:55pm', arrivalTime: '12:45am' },
+                ],
+              },
+            },
           },
         },
-      },
-      journeys: {
-        byDestinationId: {},
+        ids: ['transit'],
       },
     };
 
