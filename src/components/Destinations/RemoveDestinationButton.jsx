@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { removeDestination } from '../../actions';
 
-class RemoveDestinationButton extends React.Component {
+export class RemoveDestinationButton extends React.Component {
 
   buttonWasClicked = (e) => {
     e.preventDefault();
@@ -25,8 +25,12 @@ class RemoveDestinationButton extends React.Component {
 }
 
 RemoveDestinationButton.propTypes = {
-  removeDestination: PropTypes.func.isRequired,
+  removeDestination: PropTypes.func,
   id: PropTypes.number.isRequired,
+};
+
+RemoveDestinationButton.defaultProps = {
+  removeDestination: () => {},
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
