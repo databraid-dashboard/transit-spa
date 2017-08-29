@@ -1,6 +1,4 @@
-require('dotenv').config({path: '../../.env'})
 const googleMapsKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-process.env.NODE_ENV === 'production' ? require('dotenv').config({path: '../../.env.production'}) : require('dotenv').config({path: '../../.env.development'});
 const apiUrl = process.env.REACT_APP_API_SERVER_URL;
 
 export default class TRANSIT_API {
