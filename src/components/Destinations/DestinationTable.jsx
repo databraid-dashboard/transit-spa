@@ -6,6 +6,7 @@ import DestinationRow from './DestinationRow';
 import injectWidgetId from '../../utils/utils';
 
 export const DestinationTable = ({ destinationIds, destinationsById }) => {
+  // TODO: TEST loading...
   if (!destinationIds) return <div>Loading...</div>;
 
   return (
