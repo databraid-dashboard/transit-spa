@@ -21,6 +21,7 @@ export class PlacesAutocompleteForm extends Component {
     this.setState({ address: '' });
   };
 
+  // TODO: TEST handleFormSubmit, CALL TO fetchJourneys, AND SIMULATE ERROR
   handleFormSubmit = (event) => {
     event.preventDefault();
 
@@ -45,7 +46,10 @@ export class PlacesAutocompleteForm extends Component {
 
     return (
       <form className="ui semantic" onSubmit={this.handleFormSubmit}>
-        <PlacesAutocomplete inputProps={inputProps} />
+        <div style={{ paddingBottom: '10px' }}>
+          <PlacesAutocomplete inputProps={inputProps} />
+        </div>
+
         <button className="ui green button" id="submit-destination" type="submit">
           Submit
         </button>

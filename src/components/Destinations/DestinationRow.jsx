@@ -1,22 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Container, Segment } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 
 import JourneyTable from '../Journeys/JourneyTable';
 import DestinationHeader from './Destination/DestinationHeader';
 import RemoveDestinationButton from './RemoveDestinationButton';
 import './destination.css';
 
-export const DestinationRow = ({ id, name }) =>
-  (<Container>
-    <Segment compact className="destination-row">
-      <DestinationHeader name={name} /><RemoveDestinationButton id={id} />
-    </Segment>
-    <Segment compact textAlign="center" className="destination-row">
-      <JourneyTable id={id} />
-    </Segment>
-  </Container>);
+const DestinationRow = ({ id, name }) => (
+  <Segment textAlign="center" compact>
+    <RemoveDestinationButton id={id} />
+    <DestinationHeader name={name} />
+    <JourneyTable id={id} />
+  </Segment>
+);
 
 DestinationRow.propTypes = {
   id: PropTypes.number.isRequired,
@@ -25,7 +23,7 @@ DestinationRow.propTypes = {
 
 DestinationRow.defaultProps = {
   id: 1,
-  name: '',
+  name: 'Civic Center',
 };
 
 export default DestinationRow;

@@ -6,36 +6,43 @@ export default class TRANSIT_API {
     return fetch(
       `${apiUrl}/directions?origin=${origin}&destination=${destination}&alternatives=true`,
     )
-    .then(response => response.json())
-    .catch(e => e);
+      .then(response => response.json())
+      .catch(e => e);
+  }
+
+  static getPosition(options) {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject, options);
+    });
+  }
+
+  static fetchCurrentLocation(url) {
+    return fetch(url).then(response => response.json());
   }
 
   static getCurrentLocation() {
-    const getPosition = options =>
-    new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(resolve, reject, options);
-    });
+    return this.getPosition()
+      .then(async (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        const locationObj = { lat, lng };
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${lat},${lng}&key=${googleMapsKey}`;
 
-    return getPosition().then((position) => {
-      const lat = position.coords.latitude;
-      const lng = position.coords.longitude;
-      const location = { lat, lng };
-      const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${lat},${lng}&key=${googleMapsKey}`;
-      return fetch(url)
-      .then(response => response.json())
+        const locationInfo = await this.fetchCurrentLocation(url);
+
+        return { locationObj, locationInfo };
+      })
       .then((data) => {
-        location.address = data.results[0].formatted_address;
-        return location;
+        const { locationObj, locationInfo } = data;
+        locationObj.address = locationInfo.results[0].formatted_address;
+        return locationObj;
       })
       .catch(e => e);
-    });
   }
 
   static fetchAlerts() {
-    return fetch(
-      `${apiUrl}/alerts`,
-    )
-    .then(response => response.json())
-    .catch(e => e);
+    return fetch(`${apiUrl}/alerts`)
+      .then(response => response.json())
+      .catch(e => e);
   }
 }

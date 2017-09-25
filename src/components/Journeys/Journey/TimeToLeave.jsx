@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Icon, List } from 'semantic-ui-react';
+import { Header } from 'semantic-ui-react';
 import Timer from './Timer';
+
+const headerStyle = {
+  marginTop: '0rem',
+  marginBottom: '0rem',
+};
 
 class TimeToLeave extends Component {
   constructor(props) {
@@ -12,30 +17,28 @@ class TimeToLeave extends Component {
   }
 
   timerExpired() {
-    this.props.callRefreshJourneys();
+    this.props.refreshJourneys();
   }
 
   render() {
+    const { timeToLeaveInSeconds } = this.props;
+
     return (
-      <List.Item>
-        <Icon name="hourglass half" size="large" />
-        <List.Content>
-          <List.Header>leave in</List.Header>
-          <Timer seconds={this.props.timeToLeaveInSeconds} onComplete={this.timerExpired} />
-        </List.Content>
-      </List.Item>
+      <Header as="h1" color="grey" style={headerStyle}>
+        <Timer seconds={timeToLeaveInSeconds} onComplete={this.timerExpired} />
+      </Header>
     );
   }
 }
 
 TimeToLeave.propTypes = {
   timeToLeaveInSeconds: PropTypes.number.isRequired,
-  callRefreshJourneys: PropTypes.func.isRequired,
+  refreshJourneys: PropTypes.func.isRequired,
 };
 
 TimeToLeave.defaultProps = {
   timeToLeaveInSeconds: 5,
-  callRefreshJourneys: () => {},
+  refreshJourneys: () => {},
 };
 
 export default TimeToLeave;
